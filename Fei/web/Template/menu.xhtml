@@ -3,90 +3,29 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
-    
+
+
     <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-              
-                  <p class="centered"><a href="#aboutModal" data-toggle="modal" data-target="#profile"><img src="../resources/imgs/sebas.jpg" class="img-circle" width="60"/></a></p>
-                  <h5 class="centered">Sebastian Guerrero</h5>
-                    
-                  <li class="mt">
-                      <a class="active" href="#{request.contextPath}/Views/PaginaIndex.xhtml">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Inicio</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Registro</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="registro.xhtml">Registro Adolescente</a></li>
-                      </ul>
-                  </li>
-                      
-                   
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Seguimiento</span>
-                      </a>
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
 
-                      <ul class="sub">
-                          <li><a  href="#{request.contextPath}/Views/Valoracion.xhtml">Valoracion</a></li>
-                        
-                          <li><a  href="#">Intervencion</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-bar-chart-o "></i>
-                          <span>Informes</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="#">Informe Diagnostico</a></li>
-                          <li><a  href="#">Informe Seguimiento</a></li>
-                          <li><a  href="#">Informe Extraordinario</a></li>
-                      </ul>
-                  </li>         
-                   <li class="sub-menu">
-                      <a href="calendar.html" >
-                          <i class="fa fa-bar-chart-o "></i>
-                          <span>Gestion Tareas</span>
-                      </a>
-                     
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-book"></i>
-                          <span>Documentacion</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="#">Ley de Adolescencia</a></li>
-                          <li><a  href="#">Lineamientos</a></li>
-                      </ul>
-                  </li>
-                  
-                  
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class=" fa fa-graduation-cap"></i>
-                          <span>Fase II-Materias</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="#">Ingles</a></li>
-                          <li><a  href="#">Humanistica</a></li>
-                          <li><a  href="#">Ing.Software</a></li>
-                          <li><a  href="#">Algoritmos</a></li>
-                      </ul>
-                  </li>
+            <p class="centered"><a href="#aboutModal" data-toggle="modal" data-target="#profile"><img src="../resources/imgs/sebas.jpg" class="img-circle" width="60"/></a></p>
+            <h5 class="centered">#{usuarioControlador.usuarioSesion.nombre} #{usuarioControlador.usuarioSesion.apellidos}</h5>
 
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-    
+            <li class="mt">
+                <a class="active" href="#{request.contextPath}/faces/Views/PaginaInicioUsuario.xhtml">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+
+            <h:outputText escape="false" value="#{usuarioControlador.stringMenu}"></h:outputText> 
+
+        </ul>
+        
+        <h:inputText value="#{usuarioControlador.clave}"></h:inputText>
+        <!-- sidebar menu end-->
+    </div>
+
 </ui:fragment>
 

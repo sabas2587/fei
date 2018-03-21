@@ -61,9 +61,9 @@ public class Permiso implements Serializable {
     @Column(name = "active")
     private String active;
     @ManyToMany(mappedBy = "permisoList", fetch = FetchType.EAGER)
-    private List<Rol> rolList;
+    private List<Rol> roles;
     @OneToMany(mappedBy = "permisoPadre", fetch = FetchType.EAGER)
-    private List<Permiso> permisoList;
+    private List<Permiso> subPermisos;
     @JoinColumn(name = "permiso_padre", referencedColumnName = "pk_idPermiso")
     @ManyToOne(fetch = FetchType.EAGER)
     private Permiso permisoPadre;
@@ -129,24 +129,6 @@ public class Permiso implements Serializable {
         this.active = active;
     }
 
-    @XmlTransient
-    public List<Rol> getRolList() {
-        return rolList;
-    }
-
-    public void setRolList(List<Rol> rolList) {
-        this.rolList = rolList;
-    }
-
-    @XmlTransient
-    public List<Permiso> getPermisoList() {
-        return permisoList;
-    }
-
-    public void setPermisoList(List<Permiso> permisoList) {
-        this.permisoList = permisoList;
-    }
-
     public Permiso getPermisoPadre() {
         return permisoPadre;
     }
@@ -154,6 +136,25 @@ public class Permiso implements Serializable {
     public void setPermisoPadre(Permiso permisoPadre) {
         this.permisoPadre = permisoPadre;
     }
+    @XmlTransient
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+    
+    @XmlTransient
+    public List<Permiso> getSubPermisos() {
+        return subPermisos;
+    }
+
+    public void setSubPermisos(List<Permiso> subPermisos) {
+        this.subPermisos = subPermisos;
+    }
+    
+    
 
     @Override
     public int hashCode() {

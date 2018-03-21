@@ -91,7 +91,11 @@
         </div>
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <li><a class="logout fa fa-sign-out" href="#{usuarioControlador.cerrarSesion()}">Logout</a></li>
+                <!-- corregir boton logout, por alguna razon se dispara solo e invalida el bean de sesion borrando todos los datos del controlador...-->
+                <!-- <li><a class="logout fa fa-sign-out" href="">Logout</a></li> -->
+                <h:form>
+                    <li><h:commandLink action="#{usuarioControlador.cerrarSesion()}" class="logout fa fa-sign-out" value="cerrar sesion"></h:commandLink></li>
+                </h:form>
             </ul>
 
         </div>
@@ -101,4 +105,3 @@
 </ui:fragment>
 
 
-    
