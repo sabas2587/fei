@@ -94,7 +94,7 @@
                 <!-- corregir boton logout, por alguna razon se dispara solo e invalida el bean de sesion borrando todos los datos del controlador...-->
                 <!-- <li><a class="logout fa fa-sign-out" href="">Logout</a></li> -->
                 <h:form>
-                    <li><h:commandLink action="#{usuarioControlador.cerrarSesion()}" class="logout fa fa-sign-out" value="cerrar sesion"></h:commandLink></li>
+                    <li><h:commandButton action="#{usuarioControlador.cerrarSesion()}" class="logout fa fa-sign-out" value="cerrar sesion"></h:commandButton></li>
                 </h:form>
             </ul>
 
