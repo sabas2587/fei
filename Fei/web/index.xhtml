@@ -149,18 +149,18 @@
                                 <div class="form-group">
                                     <label for="usrname"><span class="glyphicon glyphicon-user"></span>
                                         Usuario</label><p:inputText type="text" class="form-control"
-                                                                id="txtUsername" value="#{usuarioControlador.numdocumento}" requiredMessage="Usuario obligatorio"/>
+                                                    id="txtUsername" value="#{controladorSesion.numdocumento}" requiredMessage="Usuario obligatorio"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
                                         Password</label> <p:inputText type="password" class="form-control"
-                                                                  id="txtClave" value="#{usuarioControlador.clave}" requiredMessage="Clave Obligatoria"/>
+                                                                  id="txtClave" value="#{controladorSesion.clave}" requiredMessage="Clave Obligatoria"/>
                                 </div>
                                 <div class="checkbox">
                                     <label><input type="checkbox" value="" checked="checked" />Remember
                                         me</label>
                                 </div>                    
-                                <p:commandButton  class="btn btn-success btn-block" action="#{usuarioControlador.iniciarSesion()}" value="Login"/>
+                                <p:commandButton  class="btn btn-success btn-block" action="#{controladorSesion.iniciarSesion()}" value="Login"/>
                             </h:form>
                         </div>
 

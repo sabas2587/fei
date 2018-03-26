@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.fei.controlador;
+package edu.fei.controlador.login;
 
 import edu.fei.entidad.Permiso;
 import edu.fei.entidad.Usuario;
@@ -22,9 +22,9 @@ import javax.faces.context.FacesContext;
  *
  * @author dfgm
  */
-@Named(value = "usuarioControlador")
+@Named(value = "controladorSesion")
 @SessionScoped
-public class UsuarioControlador implements Serializable {
+public class ControladorSesion implements Serializable {
 
     @EJB
     UsuarioFacade usuariosFacade;
@@ -33,18 +33,18 @@ public class UsuarioControlador implements Serializable {
     private int numdocumento;
     private String clave;
     private String stringMenu = "";
-    
-    public UsuarioControlador() {
+
+    public ControladorSesion() {
     }
 
     @PostConstruct
     public void init() {
     }
-    
+
     public String getStringMenu() {
         return stringMenu;
     }
-    
+
     public int getNumdocumento() {
         return numdocumento;
     }
@@ -90,54 +90,71 @@ public class UsuarioControlador implements Serializable {
             return "";
 
         }
-        
+
     }
 
     public void mostrarSession() {
         Usuario usuarioSesionActiva = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLog");
-        
+
     }
 
     public void cerrarSesion() throws IOException {
-        String redireccion = "";
         clave = "";
         stringMenu = "";
         numdocumento = 0;
+        usuarioSesion = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml?faces-redirect=true");
 
     }
-    
-    public void renderizarPermisos(List<Permiso> permisos){
+
+    public void renderizarPermisos(List<Permiso> permisos) {
         System.out.println("renderizando permisos");
-        for(Permiso permiso:permisos){
-            if(permiso.getPermisoPadre() == null){
-                System.out.println("permiso: " + permiso.getNombrePermiso() + " - " + permiso.getPermisoPadre()+ " - " + permiso.getUrl()+ " - ");
-                stringMenu += "<li class=\"sub-menu\">\n" +
-                                    "<a href=\"javascript:;\" >\n" +
-                                        "<i class=\"" +  permiso.getIcon() + "\"></i>\n" +
-                                        "<span>" +  permiso.getNombrePermiso() + "</span>\n" +
-                                    "</a>\n";
-               for(Permiso subpermiso:permiso.getSubPermisos()){
-                   for(Permiso p1: permisos){
-                        if(permiso.equals(p1)){
-                             System.out.println("subPermiso: " + subpermiso.getNombrePermiso() + " - " + subpermiso.getPermisoPadre()+ " - " + subpermiso.getUrl()+ " - ");
-                             stringMenu += "<ul class=\"sub\">\n" +
-                                             "<li><a  href=\""+subpermiso.getUrl()+"\">"+subpermiso.getNombrePermiso()+"</a></li>\n" +
-                                         "</ul>\n";
+        for (Permiso permiso : permisos) {
+            if (permiso.getPermisoPadre() == null) {
+                System.out.println("permiso: " + permiso.getNombrePermiso() + " - " + permiso.getPermisoPadre() + " - " + permiso.getUrl() + " - ");
+                stringMenu += "<li class=\"sub-menu\">\n"
+                        + "<a href=\"javascript:;\" >\n"
+                        + "<i class=\"" + permiso.getIcon() + "\"></i>\n"
+                        + "<span>" + permiso.getNombrePermiso() + "</span>\n"
+                        + "</a>\n";
+                for (Permiso subpermiso : permiso.getSubPermisos()) {
+                    for (Permiso p1 : permisos) {
+                        if (permiso.equals(p1)) {
+                            System.out.println("subPermiso: " + subpermiso.getNombrePermiso() + " - " + subpermiso.getPermisoPadre() + " - " + subpermiso.getUrl() + " - ");
+                            stringMenu += "<ul class=\"sub\">\n"
+                                    + "<li><a  href=\"" + subpermiso.getUrl() + "\">" + subpermiso.getNombrePermiso() + "</a></li>\n"
+                                    + "</ul>\n";
 
                         }
-                        
-                   }
+
+                    }
 
                 }
-                                
+
             }
-        
+
         }
         stringMenu += "</li>";
         System.out.println("\npermiso= " + stringMenu + "\n");
 
     }
-    
+
+    public void validarSesion() throws IOException {
+        if (!isValidado()) {
+            cerrarSesion();
+
+        }
+
+    }
+
+    public boolean isValidado() {
+        if (usuarioSesion != null) {
+            return true;
+
+        }
+        return false;
+
+    }
+
 }

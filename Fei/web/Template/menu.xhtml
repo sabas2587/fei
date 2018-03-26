@@ -10,7 +10,7 @@
         <ul class="sidebar-menu" id="nav-accordion">
 
             <p class="centered"><a href="#aboutModal" data-toggle="modal" data-target="#profile"><img src="../resources/imgs/sebas.jpg" class="img-circle" width="60"/></a></p>
-            <h5 class="centered">#{usuarioControlador.usuarioSesion.nombre} #{usuarioControlador.usuarioSesion.apellidos}</h5>
+            <h5 class="centered">#{controladorSesion.usuarioSesion.nombre} #{controladorSesion.usuarioSesion.apellidos}</h5>
 
             <li class="mt">
                 <a class="active" href="#{request.contextPath}/Views/PaginaInicioUsuario.xhtml">
@@ -19,7 +19,7 @@
                 </a>
             </li>
 
-            <h:outputText escape="false" value="#{usuarioControlador.stringMenu}"></h:outputText> 
+            <h:outputText escape="false" value="#{controladorSesion.stringMenu}"></h:outputText> 
 
         </ul>
         
