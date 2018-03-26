@@ -1,3 +1,6 @@
-/Fei/nbproject/private/
-/Fei/build/
-/Fei/dist/
+Fei/nbproject/private/
+Fei/build/
+Fei/dist/
+Fei/nbproject/ant-deploy.xml
+Fei/nbproject/project.properties
+Fei/web/WEB-INF/glassfish-resources.xml
