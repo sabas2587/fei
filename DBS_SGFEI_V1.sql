@@ -307,7 +307,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-INSERT INTO `permisos` VALUES (1,'Registro-Adolescente','Register-Teenage','','fa fa-cogs','material-icons',NULL),(2,'Registrar','Register','../Views/addAdolescente.xhtml?faces-redirect=true','','',1),(3,'Editar','Edit','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,1),(4,'Proceso-Adolescente','Process-Teenage','','fa fa-cogs','material-icons',NULL),(5,'Seguimiento','Tracing','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(6,'Diagnostico','Diagnostic','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(7,'Intervencion','Intervencion','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(8,'Informe-Adolescente','Report-Teenage','','fa fa-cogs','material-icons',NULL),(9,'Extraordinario','Extraordinary','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,8),(10,'Seguimiento','Tracing','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,8),(11,'Actividad-Adolescente','Activity-Teenage','',NULL,NULL,NULL),(12,'Registrar','Register','../Views/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,11);
+INSERT INTO `permisos` VALUES (1,'Registrar-Adolescente','Teenage','','fa fa-cogs','material-icons',NULL),(2,'Adolescente','Teenage','../Views/Adolescente/Adolescente.xhtml?faces-redirect=true','','',1),(3,'Proceso-Adolescente','Process-Teenage','','fa fa-cogs','material-icons',NULL),(4,'Seguimiento','Tracing','../Views/Proceso/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(5,'Diagnostico','Diagnostic','../Views/Proceso/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(6,'Intervencion','Intervencion','../Views/Proceso/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,4),(7,'Informe-Adolescente','Report-Teenage','','fa fa-cogs','material-icons',NULL),(8,'Extraordinario','Extraordinary','../Views/Informe/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,8),(9,'Seguimiento','Tracing','../Views/Informe/addAdolescente.xhtml?faces-redirect=true',NULL,NULL,8),(10,'Actividad-Adolescente','Activity-Teenage','',NULL,NULL,NULL),(11,'Registrar','Register','../Views/Actividad/activitidad.xhtml?faces-redirect=true',NULL,NULL,11);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-26  8:24:28
+-- Dump completed on 2018-03-26 21:47:20
