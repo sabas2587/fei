@@ -123,7 +123,7 @@ public class ControladorSesion implements Serializable {
                         if (permiso.equals(p1)) {
                             System.out.println("subPermiso: " + subpermiso.getNombrePermiso() + " - " + subpermiso.getPermisoPadre() + " - " + subpermiso.getUrl() + " - ");
                             stringMenu += "<ul class=\"sub\">\n"
-                                    + "<li><a  href=\"" + subpermiso.getUrl() + "\">" + subpermiso.getNombrePermiso() + "</a></li>\n"
+                                    + "<li><a  href=\"" + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + subpermiso.getUrl() + "\">" + subpermiso.getNombrePermiso() + "</a></li>\n"
                                     + "</ul>\n";
 
                         }
