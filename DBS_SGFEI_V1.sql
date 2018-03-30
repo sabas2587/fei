@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `dbs_sgfei_v1` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `dbs_sgfei_v1`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: dbs_sgfei_v1
@@ -98,10 +96,11 @@ CREATE TABLE `adolescente` (
   `path_document` longtext,
   `tipoDocumento` varchar(255) DEFAULT NULL,
   `Remision_pk_ordenRemision` int(11) DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`pk_idAdolescente`),
   KEY `FK_Adolescente_Remision_pk_ordenRemision` (`Remision_pk_ordenRemision`),
   CONSTRAINT `FK_Adolescente_Remision_pk_ordenRemision` FOREIGN KEY (`Remision_pk_ordenRemision`) REFERENCES `remision` (`pk_ordenRemision`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +109,7 @@ CREATE TABLE `adolescente` (
 
 LOCK TABLES `adolescente` WRITE;
 /*!40000 ALTER TABLE `adolescente` DISABLE KEYS */;
-INSERT INTO `adolescente` VALUES (1,'aa',0,'qq','2017-01-01','Bogota','aa',11,'/archivos/FileBean.java','CC',1);
+INSERT INTO `adolescente` VALUES (4,'sarnoso',NULL,'n-a','2018-03-02','Bogota','el perro',123,'/archivos/a.txt','CC',4,NULL),(5,'ratica',NULL,'aa','2018-03-01','Bogota','la',123,'/archivos/aaaaassf.txt','CC',5,NULL),(6,'brayitan',NULL,'b','2018-03-30','Bogota','el ',NULL,'/archivos/a.txt','CC',6,NULL);
 /*!40000 ALTER TABLE `adolescente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,11 +122,13 @@ DROP TABLE IF EXISTS `encuesta`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `encuesta` (
   `pk_idencuesta` int(11) NOT NULL AUTO_INCREMENT,
-  `criterio` varchar(255) DEFAULT NULL,
-  `escala` varchar(255) DEFAULT NULL,
+  `escala` int(11) DEFAULT NULL,
   `pregunta` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`pk_idencuesta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `valoracion_valoracion` int(11) NOT NULL,
+  PRIMARY KEY (`pk_idencuesta`),
+  KEY `fk_encuesta_valoracion1_idx` (`valoracion_valoracion`),
+  CONSTRAINT `fk_encuesta_valoracion1` FOREIGN KEY (`valoracion_valoracion`) REFERENCES `valoracion` (`valoracion`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,55 +137,22 @@ CREATE TABLE `encuesta` (
 
 LOCK TABLES `encuesta` WRITE;
 /*!40000 ALTER TABLE `encuesta` DISABLE KEYS */;
+INSERT INTO `encuesta` VALUES (1,3,'<cambiar pregunta>',7),(2,3,'<cambiar pregunta>',7),(3,3,'<cambiar pregunta>',7),(4,3,'<cambiar pregunta>',7),(5,3,'<cambiar pregunta>',7),(6,2,'<cambiar pregunta>',8),(7,1,'<cambiar pregunta>',8),(8,1,'<cambiar pregunta>',8),(9,5,'<cambiar pregunta>',8),(10,5,'<cambiar pregunta>',8),(11,1,'<cambiar pregunta>',9),(12,2,'<cambiar pregunta>',9),(13,3,'<cambiar pregunta>',9),(14,4,'<cambiar pregunta>',9),(15,5,'<cambiar pregunta>',9),(28,5,'<cambiar pregunta>',6),(29,4,'<cambiar pregunta>',6),(30,5,'<cambiar pregunta>',6),(31,4,'<cambiar pregunta>',6),(32,5,'<cambiar pregunta>',6),(33,2,'<cambiar pregunta>',10),(34,3,'<cambiar pregunta>',10),(35,3,'<cambiar pregunta>',10),(36,2,'<cambiar pregunta>',10),(37,1,'<cambiar pregunta>',10),(38,2,'<cambiar pregunta>',11),(39,2,'<cambiar pregunta>',11),(40,2,'<cambiar pregunta>',11),(41,2,'<cambiar pregunta>',11),(42,2,'<cambiar pregunta>',11);
 /*!40000 ALTER TABLE `encuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `informe`
+-- Table structure for table `novedad`
 --
 
-DROP TABLE IF EXISTS `informe`;
+DROP TABLE IF EXISTS `novedad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `informe` (
-  `idinformeEx` int(11) NOT NULL AUTO_INCREMENT,
-  `capacidadRestaurativa` varchar(255) DEFAULT NULL,
-  `conceptoIntegral` varchar(255) DEFAULT NULL,
-  `fechaDiagnostico` date DEFAULT NULL,
-  `fortalecimiento` varchar(255) DEFAULT NULL,
-  `objetivos` varchar(255) DEFAULT NULL,
-  `tipoinforme` varchar(255) DEFAULT NULL,
-  `trascendencia` varchar(255) DEFAULT NULL,
-  `Adolescente_pk_idAdolescente` int(11) DEFAULT NULL,
-  `Usuario_pk_idUsuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idinformeEx`),
-  KEY `FK_Informe_Adolescente_pk_idAdolescente` (`Adolescente_pk_idAdolescente`),
-  KEY `FK_Informe_Usuario_pk_idUsuario` (`Usuario_pk_idUsuario`),
-  CONSTRAINT `FK_Informe_Adolescente_pk_idAdolescente` FOREIGN KEY (`Adolescente_pk_idAdolescente`) REFERENCES `adolescente` (`pk_idAdolescente`),
-  CONSTRAINT `FK_Informe_Usuario_pk_idUsuario` FOREIGN KEY (`Usuario_pk_idUsuario`) REFERENCES `usuario` (`pk_idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `informe`
---
-
-LOCK TABLES `informe` WRITE;
-/*!40000 ALTER TABLE `informe` DISABLE KEYS */;
-/*!40000 ALTER TABLE `informe` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `intervecion`
---
-
-DROP TABLE IF EXISTS `intervecion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `intervecion` (
-  `idintervecion` int(11) NOT NULL,
+CREATE TABLE `novedad` (
+  `idintervecion` int(11) NOT NULL AUTO_INCREMENT,
   `fechaintervencion` varchar(255) DEFAULT NULL,
   `tipointervencion` varchar(255) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
   `Adolescente_pk_idAdolescente` int(11) DEFAULT NULL,
   `Usuario_pk_idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idintervecion`),
@@ -196,12 +164,12 @@ CREATE TABLE `intervecion` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `intervecion`
+-- Dumping data for table `novedad`
 --
 
-LOCK TABLES `intervecion` WRITE;
-/*!40000 ALTER TABLE `intervecion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `intervecion` ENABLE KEYS */;
+LOCK TABLES `novedad` WRITE;
+/*!40000 ALTER TABLE `novedad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `novedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,7 +190,7 @@ CREATE TABLE `permisos` (
   PRIMARY KEY (`pk_idPermiso`),
   KEY `FK_permisos_permiso_padre` (`permiso_padre`),
   CONSTRAINT `FK_permisos_permiso_padre` FOREIGN KEY (`permiso_padre`) REFERENCES `permisos` (`pk_idPermiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +199,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-INSERT INTO `permisos` VALUES (1,NULL,NULL,'Adolecentes',NULL,NULL,NULL),(2,NULL,NULL,'listar adolecentes',NULL,'/Views/Adolescente/listAdolescente.xhtml?faces-redirect=true',1),(3,NULL,NULL,'crear adolecente',NULL,'/Views/Adolescente/addAdolescente.xhtml?faces-redirect=true',1);
+INSERT INTO `permisos` VALUES (1,NULL,NULL,'Adolecentes',NULL,NULL,NULL),(2,NULL,NULL,'listar adolecentes',NULL,'/Views/Adolescente/listAdolescente.xhtml?faces-redirect=true',1),(3,NULL,NULL,'crear adolecente',NULL,'/Views/Adolescente/addAdolescente.xhtml?faces-redirect=true',1),(4,NULL,NULL,'Valoracion',NULL,NULL,NULL),(5,NULL,NULL,'Listar valoraciones',NULL,'/Views/Valoracion/ListarValoraciones.xhtml?faces-redirect=true',4),(6,NULL,NULL,'Crear valoracion',NULL,'/Views/Valoracion/CrearValoracion.xhtml?faces-redirect=true',4);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,8 +213,8 @@ DROP TABLE IF EXISTS `permisos_has_rol`;
 CREATE TABLE `permisos_has_rol` (
   `permisos_pk_idPermiso` int(11) NOT NULL,
   `Rol_pk_idRol` int(11) NOT NULL,
-  PRIMARY KEY (`permisos_pk_idPermiso`,`Rol_pk_idRol`),
   KEY `FK_permisos_has_Rol_Rol_pk_idRol` (`Rol_pk_idRol`),
+  KEY `FK_permisos_has_Rol_permisos_pk_idPermiso` (`permisos_pk_idPermiso`),
   CONSTRAINT `FK_permisos_has_Rol_Rol_pk_idRol` FOREIGN KEY (`Rol_pk_idRol`) REFERENCES `rol` (`pk_idRol`),
   CONSTRAINT `FK_permisos_has_Rol_permisos_pk_idPermiso` FOREIGN KEY (`permisos_pk_idPermiso`) REFERENCES `permisos` (`pk_idPermiso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -258,7 +226,7 @@ CREATE TABLE `permisos_has_rol` (
 
 LOCK TABLES `permisos_has_rol` WRITE;
 /*!40000 ALTER TABLE `permisos_has_rol` DISABLE KEYS */;
-INSERT INTO `permisos_has_rol` VALUES (1,1),(2,1),(3,1);
+INSERT INTO `permisos_has_rol` VALUES (4,2),(5,2),(6,2),(4,3),(5,3),(6,3),(4,4),(5,4),(6,4),(4,5),(5,5),(6,5),(1,1),(2,1),(3,1),(4,1),(5,1);
 /*!40000 ALTER TABLE `permisos_has_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,19 +238,22 @@ DROP TABLE IF EXISTS `procesos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `procesos` (
-  `pk_idValoracion` int(11) NOT NULL,
-  `fechaValoracion` date DEFAULT NULL,
-  `tipoactividad` varchar(255) DEFAULT NULL,
+  `idinformeEx` int(11) NOT NULL AUTO_INCREMENT,
+  `capacidadRestaurativa` varchar(255) DEFAULT NULL,
+  `tipo_concepto` varchar(45) DEFAULT NULL,
+  `fechaDiagnostico` date DEFAULT NULL,
+  `fortalecimiento` varchar(255) DEFAULT NULL,
+  `objetivos` varchar(255) DEFAULT NULL,
+  `tipoproceso` varchar(255) DEFAULT NULL,
+  `trascendencia` varchar(255) DEFAULT NULL,
   `Adolescente_pk_idAdolescente` int(11) DEFAULT NULL,
-  `Encuesta_pk_idencuesta` int(11) DEFAULT NULL,
   `Usuario_pk_idUsuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pk_idValoracion`),
-  KEY `FK_procesos_Usuario_pk_idUsuario` (`Usuario_pk_idUsuario`),
-  KEY `FK_procesos_Encuesta_pk_idencuesta` (`Encuesta_pk_idencuesta`),
-  KEY `FK_procesos_Adolescente_pk_idAdolescente` (`Adolescente_pk_idAdolescente`),
-  CONSTRAINT `FK_procesos_Adolescente_pk_idAdolescente` FOREIGN KEY (`Adolescente_pk_idAdolescente`) REFERENCES `adolescente` (`pk_idAdolescente`),
-  CONSTRAINT `FK_procesos_Encuesta_pk_idencuesta` FOREIGN KEY (`Encuesta_pk_idencuesta`) REFERENCES `encuesta` (`pk_idencuesta`),
-  CONSTRAINT `FK_procesos_Usuario_pk_idUsuario` FOREIGN KEY (`Usuario_pk_idUsuario`) REFERENCES `usuario` (`pk_idUsuario`)
+  `path_concepto_final` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idinformeEx`),
+  KEY `FK_Informe_Adolescente_pk_idAdolescente` (`Adolescente_pk_idAdolescente`),
+  KEY `FK_Informe_Usuario_pk_idUsuario` (`Usuario_pk_idUsuario`),
+  CONSTRAINT `FK_Informe_Adolescente_pk_idAdolescente` FOREIGN KEY (`Adolescente_pk_idAdolescente`) REFERENCES `adolescente` (`pk_idAdolescente`),
+  CONSTRAINT `FK_Informe_Usuario_pk_idUsuario` FOREIGN KEY (`Usuario_pk_idUsuario`) REFERENCES `usuario` (`pk_idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -308,7 +279,7 @@ CREATE TABLE `remision` (
   `fechaRemision` date DEFAULT NULL,
   `tipoRemision` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pk_ordenRemision`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +288,7 @@ CREATE TABLE `remision` (
 
 LOCK TABLES `remision` WRITE;
 /*!40000 ALTER TABLE `remision` DISABLE KEYS */;
-INSERT INTO `remision` VALUES (1,'Juez','2018-03-27','Homicidio');
+INSERT INTO `remision` VALUES (4,'Juez','2018-03-29','Homicidio'),(5,'Juez','2018-03-01','Homicidio'),(6,'Juez','2018-03-01','Robo');
 /*!40000 ALTER TABLE `remision` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +304,7 @@ CREATE TABLE `rol` (
   `Cargo` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pk_idRol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +313,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'admin','admin');
+INSERT INTO `rol` VALUES (1,'Admin',NULL),(2,'medico',NULL),(3,'psicologo',NULL),(4,'nutricion',NULL),(5,'trabajadora social',NULL),(6,'secretaria',NULL);
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,7 +336,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`pk_idUsuario`),
   KEY `FK_Usuario_Rol_pk_idRol` (`Rol_pk_idRol`),
   CONSTRAINT `FK_Usuario_Rol_pk_idRol` FOREIGN KEY (`Rol_pk_idRol`) REFERENCES `rol` (`pk_idRol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,8 +345,41 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'1','1','1','1','1',1,1);
+INSERT INTO `usuario` VALUES (5,'admin','1','1','1','admin',1,1),(6,'medico','2','1','2','medico',2,2),(7,'psicologo','3','1','3','psicologo3',3,3),(8,'nutricionista','4','1','4','nutricionista',4,4),(9,'trabajador social','5','1','5','trabajador social',5,5),(10,'secretaria','6','1','6','secretaria',6,6);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `valoracion`
+--
+
+DROP TABLE IF EXISTS `valoracion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `valoracion` (
+  `valoracion` int(11) NOT NULL AUTO_INCREMENT,
+  `fechaValoracion` date DEFAULT NULL,
+  `tipoactividad` varchar(255) DEFAULT NULL,
+  `Adolescente_pk_idAdolescente` int(11) DEFAULT NULL,
+  `Usuario_pk_idUsuario` int(11) DEFAULT NULL,
+  `recomendacion` varchar(100) DEFAULT NULL,
+  `concepto_integral` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`valoracion`),
+  KEY `FK_procesos_Usuario_pk_idUsuario` (`Usuario_pk_idUsuario`),
+  KEY `FK_procesos_Adolescente_pk_idAdolescente` (`Adolescente_pk_idAdolescente`),
+  CONSTRAINT `FK_procesos_Adolescente_pk_idAdolescente` FOREIGN KEY (`Adolescente_pk_idAdolescente`) REFERENCES `adolescente` (`pk_idAdolescente`),
+  CONSTRAINT `FK_procesos_Usuario_pk_idUsuario` FOREIGN KEY (`Usuario_pk_idUsuario`) REFERENCES `usuario` (`pk_idUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `valoracion`
+--
+
+LOCK TABLES `valoracion` WRITE;
+/*!40000 ALTER TABLE `valoracion` DISABLE KEYS */;
+INSERT INTO `valoracion` VALUES (6,'2018-03-30','123',4,6,'123','123'),(7,'2018-03-30','aa',5,6,'aaa','aaa'),(8,'2018-03-30','psicologo',4,7,'psicologo','psicologo'),(9,'2018-03-30','trabajador social ',4,9,'trabajador social ','trabajador social '),(10,'2018-03-30','medico medico',6,6,'medico medico','medico medico'),(11,'2018-03-30','psicologo psicologo',5,7,'psicologo psicologo','psicologo psicologo');
+/*!40000 ALTER TABLE `valoracion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -395,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-27 21:12:11
+-- Dump completed on 2018-03-30 12:13:46
