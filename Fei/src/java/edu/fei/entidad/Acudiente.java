@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
 @Table(name = "acudiente")
@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Acudiente.findAll", query = "SELECT a FROM Acudiente a")
     , @NamedQuery(name = "Acudiente.findByPkidAcudiente", query = "SELECT a FROM Acudiente a WHERE a.pkidAcudiente = :pkidAcudiente")
+    , @NamedQuery(name = "Acudiente.findByEmail", query = "SELECT a FROM Acudiente a WHERE a.email = :email")
     , @NamedQuery(name = "Acudiente.findByNombre", query = "SELECT a FROM Acudiente a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Acudiente.findByTelefono", query = "SELECT a FROM Acudiente a WHERE a.telefono = :telefono")
-    , @NamedQuery(name = "Acudiente.findByEmail", query = "SELECT a FROM Acudiente a WHERE a.email = :email")})
+    , @NamedQuery(name = "Acudiente.findByTelefono", query = "SELECT a FROM Acudiente a WHERE a.telefono = :telefono")})
 public class Acudiente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,17 +41,14 @@ public class Acudiente implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_idAcudiente")
     private Integer pkidAcudiente;
-    @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Basic(optional = false)
-    @Column(name = "telefono")
-    private int telefono;
-    @Basic(optional = false)
     @Column(name = "email")
     private String email;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "telefono")
+    private Integer telefono;
     @JoinColumn(name = "Adolescente_pk_idAdolescente", referencedColumnName = "pk_idAdolescente")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adolescente adolescentepkidAdolescente;
 
     public Acudiente() {
@@ -59,13 +56,6 @@ public class Acudiente implements Serializable {
 
     public Acudiente(Integer pkidAcudiente) {
         this.pkidAcudiente = pkidAcudiente;
-    }
-
-    public Acudiente(Integer pkidAcudiente, String nombre, int telefono, String email) {
-        this.pkidAcudiente = pkidAcudiente;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.email = email;
     }
 
     public Integer getPkidAcudiente() {
@@ -76,6 +66,14 @@ public class Acudiente implements Serializable {
         this.pkidAcudiente = pkidAcudiente;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -84,20 +82,12 @@ public class Acudiente implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Adolescente getAdolescentepkidAdolescente() {

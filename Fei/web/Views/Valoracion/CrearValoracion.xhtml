@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+                    </div>
+                </div>
+                <br></br>                                               
+                <br></br> 
+                
+                <f:view>
+
+                    <h:form>
+                        <h1><h:outputText value="Valoracion"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Tipoactividad:" for="tipoactividad" />
+                            <p:inputText id="tipoactividad" value="#{controladorCrearValoracion.valoracion.tipoactividad}" title="Tipoactividad" required="true" requiredMessage="Este campo es requerido."/>
+                            <p:outputLabel value="Recomendacion:" for="recomendacion" />
+                            <p:inputTextarea id="recomendacion" value="#{controladorCrearValoracion.valoracion.recomendacion}" title="Recomendacion" required="true" requiredMessage="Este campo es requerido."/>
+                            <p:outputLabel value="ConceptoIntegral:" for="conceptoIntegral" />
+                            <p:inputTextarea id="conceptoIntegral" value="#{controladorCrearValoracion.valoracion.conceptoIntegral}" title="ConceptoIntegral" required="true" requiredMessage="Este campo es requerido."/>
+                            <p:outputLabel value="AdolescentepkidAdolescente:" for="adolescentepkidAdolescente" />
+                            <p:selectOneMenu id="adolescentepkidAdolescente" value="#{controladorCrearValoracion.valoracion.adolescentepkidAdolescente}" converter="adolescenteConverter">
+                                <f:selectItems value="#{controladorCrearValoracion.listaAdolecentes}" var="listaAdolecentes" itemLabel="#{listaAdolecentes.nombre} #{listaAdolecentes.apellidos}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+
+                        <h1><h:outputText value="Encuesta"/></h1>
+                        <p:panelGrid columns="2" >
+                            <p:outputLabel value="Escala:"  />
+                            <p:outputLabel value="Pregunta:" />
+                            <p:selectOneMenu value="#{controladorCrearValoracion.encuesta1.escala}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="El joven esta comiendo" />
+                            <p:selectOneMenu value="#{controladorCrearValoracion.encuesta2.escala}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="El joven esta deprimido" />
+                            <p:selectOneMenu value="#{controladorCrearValoracion.encuesta3.escala}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="El joven consume droga" />
+                            <p:selectOneMenu value="#{controladorCrearValoracion.encuesta4.escala}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="El joven sabe leer" />
+                            <p:selectOneMenu value="#{controladorCrearValoracion.encuesta5.escala}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="El joven ha follado" />
+                        </p:panelGrid >
+                        
+                        <h1><h:outputText value="Opciones"/></h1>
+                        <p:panelGrid columns="2">
+                            <h:commandButton value="cancelar" action="/Views/Valoracion/ListarValoraciones.xhtml?faces-redirect=true" immediate="true"></h:commandButton>
+                            <h:commandButton value="Guardar" action="#{controladorCrearValoracion.crearValoracion()}"></h:commandButton>
+                        </p:panelGrid>
+
+                    </h:form>
+
+                </f:view>
+
+            </section><!--/wrapper -->
+            
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>

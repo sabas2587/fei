@@ -6,10 +6,10 @@
 package edu.fei.entidad;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,22 +30,23 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
-@Table(name = "Adolescente")
+@Table(name = "adolescente")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Adolescente.findAll", query = "SELECT a FROM Adolescente a")
     , @NamedQuery(name = "Adolescente.findByPkidAdolescente", query = "SELECT a FROM Adolescente a WHERE a.pkidAdolescente = :pkidAdolescente")
-    , @NamedQuery(name = "Adolescente.findByTipoDocumento", query = "SELECT a FROM Adolescente a WHERE a.tipoDocumento = :tipoDocumento")
-    , @NamedQuery(name = "Adolescente.findByNumeroDocumento", query = "SELECT a FROM Adolescente a WHERE a.numeroDocumento = :numeroDocumento")
-    , @NamedQuery(name = "Adolescente.findByNombre", query = "SELECT a FROM Adolescente a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Adolescente.findByApellidos", query = "SELECT a FROM Adolescente a WHERE a.apellidos = :apellidos")
+    , @NamedQuery(name = "Adolescente.findByEdad", query = "SELECT a FROM Adolescente a WHERE a.edad = :edad")
+    , @NamedQuery(name = "Adolescente.findByEscolaridad", query = "SELECT a FROM Adolescente a WHERE a.escolaridad = :escolaridad")
     , @NamedQuery(name = "Adolescente.findByFechaNacimiento", query = "SELECT a FROM Adolescente a WHERE a.fechaNacimiento = :fechaNacimiento")
     , @NamedQuery(name = "Adolescente.findByLugarNacimiento", query = "SELECT a FROM Adolescente a WHERE a.lugarNacimiento = :lugarNacimiento")
-    , @NamedQuery(name = "Adolescente.findByEdad", query = "SELECT a FROM Adolescente a WHERE a.edad = :edad")
-    , @NamedQuery(name = "Adolescente.findByEscolaridad", query = "SELECT a FROM Adolescente a WHERE a.escolaridad = :escolaridad")})
+    , @NamedQuery(name = "Adolescente.findByNombre", query = "SELECT a FROM Adolescente a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Adolescente.findByNumeroDocumento", query = "SELECT a FROM Adolescente a WHERE a.numeroDocumento = :numeroDocumento")
+    , @NamedQuery(name = "Adolescente.findByTipoDocumento", query = "SELECT a FROM Adolescente a WHERE a.tipoDocumento = :tipoDocumento")
+    , @NamedQuery(name = "Adolescente.findByEstado", query = "SELECT a FROM Adolescente a WHERE a.estado = :estado")})
 public class Adolescente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,45 +55,40 @@ public class Adolescente implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_idAdolescente")
     private Integer pkidAdolescente;
-    @Basic(optional = false)
-    @Column(name = "tipoDocumento")
-    private String tipoDocumento;
-    @Basic(optional = false)
-    @Column(name = "numeroDocumento")
-    private long numeroDocumento;
-    @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
-    @Basic(optional = false)
     @Column(name = "apellidos")
     private String apellidos;
-    @Basic(optional = false)
+    @Column(name = "edad")
+    private Integer edad;
+    @Column(name = "escolaridad")
+    private String escolaridad;
     @Column(name = "fechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
     @Column(name = "lugarNacimiento")
     private String lugarNacimiento;
-    @Basic(optional = false)
-    @Column(name = "edad")
-    private int edad;
-    @Basic(optional = false)
-    @Column(name = "escolaridad")
-    private String escolaridad;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "numeroDocumento")
+    private BigInteger numeroDocumento;
     @Lob
     @Column(name = "path_document")
     private String pathDocument;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
-    private List<Informe> informeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
+    @Column(name = "tipoDocumento")
+    private String tipoDocumento;
+    @Column(name = "estado")
+    private Integer estado;
+    @OneToMany(mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
+    private List<Novedad> novedadList;
+    @OneToMany(mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
     private List<Acudiente> acudienteList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
-    private List<Intervecion> intervecionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
-    private List<Actividad> actividadList;
     @JoinColumn(name = "Remision_pk_ordenRemision", referencedColumnName = "pk_ordenRemision")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Remision remisionpkordenRemision;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
+    private List<Valoracion> valoracionList;
+    @OneToMany(mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
+    private List<Actividad> actividadList;
+    @OneToMany(mappedBy = "adolescentepkidAdolescente", fetch = FetchType.EAGER)
     private List<Proceso> procesoList;
 
     public Adolescente() {
@@ -100,17 +96,6 @@ public class Adolescente implements Serializable {
 
     public Adolescente(Integer pkidAdolescente) {
         this.pkidAdolescente = pkidAdolescente;
-    }
-
-    public Adolescente(Integer pkidAdolescente, String tipoDocumento, long numeroDocumento, String nombre, String apellidos, Date fechaNacimiento, int edad, String escolaridad) {
-        this.pkidAdolescente = pkidAdolescente;
-        this.tipoDocumento = tipoDocumento;
-        this.numeroDocumento = numeroDocumento;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
-        this.escolaridad = escolaridad;
     }
 
     public Integer getPkidAdolescente() {
@@ -121,36 +106,28 @@ public class Adolescente implements Serializable {
         this.pkidAdolescente = pkidAdolescente;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public long getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(long numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getApellidos() {
         return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+
+    public String getEscolaridad() {
+        return escolaridad;
+    }
+
+    public void setEscolaridad(String escolaridad) {
+        this.escolaridad = escolaridad;
     }
 
     public Date getFechaNacimiento() {
@@ -169,20 +146,20 @@ public class Adolescente implements Serializable {
         this.lugarNacimiento = lugarNacimiento;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getEscolaridad() {
-        return escolaridad;
+    public BigInteger getNumeroDocumento() {
+        return numeroDocumento;
     }
 
-    public void setEscolaridad(String escolaridad) {
-        this.escolaridad = escolaridad;
+    public void setNumeroDocumento(BigInteger numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public String getPathDocument() {
@@ -193,13 +170,29 @@ public class Adolescente implements Serializable {
         this.pathDocument = pathDocument;
     }
 
-    @XmlTransient
-    public List<Informe> getInformeList() {
-        return informeList;
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public void setInformeList(List<Informe> informeList) {
-        this.informeList = informeList;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    @XmlTransient
+    public List<Novedad> getNovedadList() {
+        return novedadList;
+    }
+
+    public void setNovedadList(List<Novedad> novedadList) {
+        this.novedadList = novedadList;
     }
 
     @XmlTransient
@@ -211,13 +204,21 @@ public class Adolescente implements Serializable {
         this.acudienteList = acudienteList;
     }
 
-    @XmlTransient
-    public List<Intervecion> getIntervecionList() {
-        return intervecionList;
+    public Remision getRemisionpkordenRemision() {
+        return remisionpkordenRemision;
     }
 
-    public void setIntervecionList(List<Intervecion> intervecionList) {
-        this.intervecionList = intervecionList;
+    public void setRemisionpkordenRemision(Remision remisionpkordenRemision) {
+        this.remisionpkordenRemision = remisionpkordenRemision;
+    }
+
+    @XmlTransient
+    public List<Valoracion> getValoracionList() {
+        return valoracionList;
+    }
+
+    public void setValoracionList(List<Valoracion> valoracionList) {
+        this.valoracionList = valoracionList;
     }
 
     @XmlTransient
@@ -227,14 +228,6 @@ public class Adolescente implements Serializable {
 
     public void setActividadList(List<Actividad> actividadList) {
         this.actividadList = actividadList;
-    }
-
-    public Remision getRemisionpkordenRemision() {
-        return remisionpkordenRemision;
-    }
-
-    public void setRemisionpkordenRemision(Remision remisionpkordenRemision) {
-        this.remisionpkordenRemision = remisionpkordenRemision;
     }
 
     @XmlTransient

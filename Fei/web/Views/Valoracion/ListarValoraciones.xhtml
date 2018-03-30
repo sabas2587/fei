@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+                    </div>
+                </div>
+                <br></br>                                               
+
+                <f:view>
+
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{controladorListarValoracion.listaValoraciones}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Valoracion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valoracion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaValoracion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaValoracion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipoactividad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoactividad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Recomendacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.recomendacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ConceptoIntegral"/>
+                                </f:facet>
+                                <h:outputText value="#{item.conceptoIntegral}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Adolescente"/>
+                                </f:facet>
+                                <h:outputText value="#{item.adolescentepkidAdolescente.nombre} #{item.adolescentepkidAdolescente.apellidos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Profesional"/>
+                                </f:facet>
+                                <h:outputText value="#{item.usuariopkidUsuario.nombre} #{item.usuariopkidUsuario.apellidos}" />
+                            </p:column>
+                            <p:column rendered="#{controladorSesion.usuarioSesion.rolpkidRol.pkidRol == 1}">
+                                <f:facet name="header">
+                                    <h:outputText value="opciones"/>
+                                </f:facet>
+                                <h:commandButton value="editar" action="#{controladorEditarValoracion.prepararEditar(item)}"></h:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:form>
+
+                </f:view>
+
+            </section><!--/wrapper -->
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>

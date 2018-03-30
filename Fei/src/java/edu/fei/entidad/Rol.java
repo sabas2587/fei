@@ -8,7 +8,6 @@ package edu.fei.entidad;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,16 +26,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
-@Table(name = "Rol")
+@Table(name = "rol")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")
     , @NamedQuery(name = "Rol.findByPkidRol", query = "SELECT r FROM Rol r WHERE r.pkidRol = :pkidRol")
-    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")
-    , @NamedQuery(name = "Rol.findByCargo", query = "SELECT r FROM Rol r WHERE r.cargo = :cargo")})
+    , @NamedQuery(name = "Rol.findByCargo", query = "SELECT r FROM Rol r WHERE r.cargo = :cargo")
+    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")})
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,29 +44,24 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_idRol")
     private Integer pkidRol;
-    @Basic(optional = false)
-    @Column(name = "nombre")
-    private String nombre;
     @Column(name = "Cargo")
     private String cargo;
-    @JoinTable(name = "permisos_has_Rol", joinColumns = {
+    @Column(name = "nombre")
+    private String nombre;
+    
+    @OneToMany(mappedBy = "rolpkidRol", fetch = FetchType.EAGER)
+    private List<Usuario> usuarios;
+    @JoinTable(name = "permisos_has_rol", joinColumns = {
         @JoinColumn(name = "Rol_pk_idRol", referencedColumnName = "pk_idRol")}, inverseJoinColumns = {
         @JoinColumn(name = "permisos_pk_idPermiso", referencedColumnName = "pk_idPermiso")})
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Permiso> permisoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolpkidRol", fetch = FetchType.EAGER)
-    private List<Usuario> usuarioList;
+    private List<Permiso> permisos;
 
     public Rol() {
     }
 
     public Rol(Integer pkidRol) {
         this.pkidRol = pkidRol;
-    }
-
-    public Rol(Integer pkidRol, String nombre) {
-        this.pkidRol = pkidRol;
-        this.nombre = nombre;
     }
 
     public Integer getPkidRol() {
@@ -78,14 +72,6 @@ public class Rol implements Serializable {
         this.pkidRol = pkidRol;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getCargo() {
         return cargo;
     }
@@ -94,22 +80,30 @@ public class Rol implements Serializable {
         this.cargo = cargo;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @XmlTransient
-    public List<Permiso> getPermisoList() {
-        return permisoList;
+    public List<Permiso> getPermisos() {
+        return permisos;
     }
 
-    public void setPermisoList(List<Permiso> permisoList) {
-        this.permisoList = permisoList;
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
     }
 
     @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override

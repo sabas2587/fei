@@ -5,17 +5,17 @@
  */
 package edu.fei.facade;
 
-import edu.fei.entidad.Intervecion;
+import edu.fei.entidad.Novedad;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Stateless
-public class IntervecionFacade extends AbstractFacade<Intervecion> {
+public class NovedadFacade extends AbstractFacade<Novedad> {
 
     @PersistenceContext(unitName = "FeiPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class IntervecionFacade extends AbstractFacade<Intervecion> {
         return em;
     }
 
-    public IntervecionFacade() {
-        super(Intervecion.class);
+    public NovedadFacade() {
+        super(Novedad.class);
     }
     
 }

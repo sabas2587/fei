@@ -6,35 +6,32 @@
 package edu.fei.entidad;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
-@Table(name = "Encuesta")
+@Table(name = "encuesta")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Encuesta.findAll", query = "SELECT e FROM Encuesta e")
     , @NamedQuery(name = "Encuesta.findByPkIdencuesta", query = "SELECT e FROM Encuesta e WHERE e.pkIdencuesta = :pkIdencuesta")
-    , @NamedQuery(name = "Encuesta.findByPregunta", query = "SELECT e FROM Encuesta e WHERE e.pregunta = :pregunta")
-    , @NamedQuery(name = "Encuesta.findByCriterio", query = "SELECT e FROM Encuesta e WHERE e.criterio = :criterio")
-    , @NamedQuery(name = "Encuesta.findByEscala", query = "SELECT e FROM Encuesta e WHERE e.escala = :escala")})
+    , @NamedQuery(name = "Encuesta.findByEscala", query = "SELECT e FROM Encuesta e WHERE e.escala = :escala")
+    , @NamedQuery(name = "Encuesta.findByPregunta", query = "SELECT e FROM Encuesta e WHERE e.pregunta = :pregunta")})
 public class Encuesta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,26 +40,23 @@ public class Encuesta implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_idencuesta")
     private Integer pkIdencuesta;
-    @Basic(optional = false)
+    @Column(name = "escala")
+    private Integer escala;
     @Column(name = "pregunta")
     private String pregunta;
-    @Column(name = "criterio")
-    private String criterio;
-    @Column(name = "escala")
-    private String escala;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encuestapkidencuesta", fetch = FetchType.EAGER)
-    private List<Proceso> procesoList;
+    @JoinColumn(name = "valoracion_valoracion", referencedColumnName = "valoracion")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Valoracion valoracionValoracion;
 
     public Encuesta() {
     }
 
+    public Encuesta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+    
     public Encuesta(Integer pkIdencuesta) {
         this.pkIdencuesta = pkIdencuesta;
-    }
-
-    public Encuesta(Integer pkIdencuesta, String pregunta) {
-        this.pkIdencuesta = pkIdencuesta;
-        this.pregunta = pregunta;
     }
 
     public Integer getPkIdencuesta() {
@@ -73,6 +67,14 @@ public class Encuesta implements Serializable {
         this.pkIdencuesta = pkIdencuesta;
     }
 
+    public Integer getEscala() {
+        return escala;
+    }
+
+    public void setEscala(Integer escala) {
+        this.escala = escala;
+    }
+
     public String getPregunta() {
         return pregunta;
     }
@@ -81,29 +83,12 @@ public class Encuesta implements Serializable {
         this.pregunta = pregunta;
     }
 
-    public String getCriterio() {
-        return criterio;
+    public Valoracion getValoracionValoracion() {
+        return valoracionValoracion;
     }
 
-    public void setCriterio(String criterio) {
-        this.criterio = criterio;
-    }
-
-    public String getEscala() {
-        return escala;
-    }
-
-    public void setEscala(String escala) {
-        this.escala = escala;
-    }
-
-    @XmlTransient
-    public List<Proceso> getProcesoList() {
-        return procesoList;
-    }
-
-    public void setProcesoList(List<Proceso> procesoList) {
-        this.procesoList = procesoList;
+    public void setValoracionValoracion(Valoracion valoracionValoracion) {
+        this.valoracionValoracion = valoracionValoracion;
     }
 
     @Override

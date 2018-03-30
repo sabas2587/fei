@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,20 +22,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
-@Table(name = "intervecion")
+@Table(name = "novedad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Intervecion.findAll", query = "SELECT i FROM Intervecion i")
-    , @NamedQuery(name = "Intervecion.findByIdintervecion", query = "SELECT i FROM Intervecion i WHERE i.idintervecion = :idintervecion")
-    , @NamedQuery(name = "Intervecion.findByFechaintervencion", query = "SELECT i FROM Intervecion i WHERE i.fechaintervencion = :fechaintervencion")
-    , @NamedQuery(name = "Intervecion.findByTipointervencion", query = "SELECT i FROM Intervecion i WHERE i.tipointervencion = :tipointervencion")})
-public class Intervecion implements Serializable {
+    @NamedQuery(name = "Novedad.findAll", query = "SELECT n FROM Novedad n")
+    , @NamedQuery(name = "Novedad.findByIdintervecion", query = "SELECT n FROM Novedad n WHERE n.idintervecion = :idintervecion")
+    , @NamedQuery(name = "Novedad.findByFechaintervencion", query = "SELECT n FROM Novedad n WHERE n.fechaintervencion = :fechaintervencion")
+    , @NamedQuery(name = "Novedad.findByTipointervencion", query = "SELECT n FROM Novedad n WHERE n.tipointervencion = :tipointervencion")
+    , @NamedQuery(name = "Novedad.findByDescripcion", query = "SELECT n FROM Novedad n WHERE n.descripcion = :descripcion")})
+public class Novedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idintervecion")
     private Integer idintervecion;
@@ -41,17 +45,19 @@ public class Intervecion implements Serializable {
     private String fechaintervencion;
     @Column(name = "tipointervencion")
     private String tipointervencion;
+    @Column(name = "descripcion")
+    private String descripcion;
     @JoinColumn(name = "Adolescente_pk_idAdolescente", referencedColumnName = "pk_idAdolescente")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adolescente adolescentepkidAdolescente;
     @JoinColumn(name = "Usuario_pk_idUsuario", referencedColumnName = "pk_idUsuario")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuariopkidUsuario;
 
-    public Intervecion() {
+    public Novedad() {
     }
 
-    public Intervecion(Integer idintervecion) {
+    public Novedad(Integer idintervecion) {
         this.idintervecion = idintervecion;
     }
 
@@ -77,6 +83,14 @@ public class Intervecion implements Serializable {
 
     public void setTipointervencion(String tipointervencion) {
         this.tipointervencion = tipointervencion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Adolescente getAdolescentepkidAdolescente() {
@@ -105,10 +119,10 @@ public class Intervecion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Intervecion)) {
+        if (!(object instanceof Novedad)) {
             return false;
         }
-        Intervecion other = (Intervecion) object;
+        Novedad other = (Novedad) object;
         if ((this.idintervecion == null && other.idintervecion != null) || (this.idintervecion != null && !this.idintervecion.equals(other.idintervecion))) {
             return false;
         }
@@ -117,7 +131,7 @@ public class Intervecion implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.fei.entidad.Intervecion[ idintervecion=" + idintervecion + " ]";
+        return "edu.fei.entidad.Novedad[ idintervecion=" + idintervecion + " ]";
     }
     
 }

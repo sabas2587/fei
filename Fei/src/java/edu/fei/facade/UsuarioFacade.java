@@ -29,21 +29,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-       public Usuario inicioSesion (int numdocuemnto,String clave){
-        
-        Usuario u =null;
-        
+
+    public Usuario inicioSesion(int numdocuemnto, String clave) {
+
+        Usuario u = null;
+
         try {
-            
-            TypedQuery<Usuario> query = getEntityManager().createNamedQuery("Usuario.login",Usuario.class);
+
+            TypedQuery<Usuario> query = getEntityManager().createNamedQuery("Usuario.login", Usuario.class);
             query.setParameter("numeroDocumento", numdocuemnto);
-            query.setParameter("clave", clave);
+            query.setParameter("contraseña", clave);
             u = query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
-     
+
         return u;
-        }
+    }
 }

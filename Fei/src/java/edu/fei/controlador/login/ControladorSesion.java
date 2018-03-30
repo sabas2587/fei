@@ -82,7 +82,7 @@ public class ControladorSesion implements Serializable {
         if (usuarioSesion != null) {
             System.out.println(usuarioSesion.getNombre());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLog", usuarioSesion);
-            renderizarPermisos(usuarioSesion.getRolpkidRol().getPermisoList());
+            renderizarPermisos(usuarioSesion.getRolpkidRol().getPermisos());
             return "/Views/PaginaInicioUsuario.xhtml?faces-redirect=true";
 
         } else {
@@ -109,7 +109,7 @@ public class ControladorSesion implements Serializable {
     }
 
     public void renderizarPermisos(List<Permiso> permisos) {
-        System.out.println("renderizando permisos");
+        
         for (Permiso permiso : permisos) {
             if (permiso.getPermisoPadre() == null) {
                 System.out.println("permiso: " + permiso.getNombrePermiso() + " - " + permiso.getPermisoPadre() + " - " + permiso.getUrl() + " - ");
@@ -118,12 +118,13 @@ public class ControladorSesion implements Serializable {
                         + "<i class=\"" + permiso.getIcon() + "\"></i>\n"
                         + "<span>" + permiso.getNombrePermiso() + "</span>\n"
                         + "</a>\n";
-                for (Permiso subpermiso : permiso.getSubPermisos()) {
+                List<Permiso>subPermisos = permiso.getSubPermisos();
+                for (Permiso sp : subPermisos) {
                     for (Permiso p1 : permisos) {
-                        if (permiso.equals(p1)) {
-                            System.out.println("subPermiso: " + subpermiso.getNombrePermiso() + " - " + subpermiso.getPermisoPadre() + " - " + subpermiso.getUrl() + " - ");
+                        if (sp.equals(p1)) {
+                            System.out.println("subPermiso: " + sp.getNombrePermiso() + " - " + sp.getPermisoPadre() + " - " + sp.getUrl() + " - ");
                             stringMenu += "<ul class=\"sub\">\n"
-                                    + "<li><a  href=\"" + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + subpermiso.getUrl() + "\">" + subpermiso.getNombrePermiso() + "</a></li>\n"
+                                    + "<li><a  href=\"" + FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + sp.getUrl() + "\">" + sp.getNombrePermiso() + "</a></li>\n"
                                     + "</ul>\n";
 
                         }

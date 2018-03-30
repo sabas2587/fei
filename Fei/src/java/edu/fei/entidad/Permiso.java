@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.fei.entidad;
 
 import java.io.Serializable;
@@ -60,7 +55,8 @@ public class Permiso implements Serializable {
     private String icon;
     @Column(name = "active")
     private String active;
-    @ManyToMany(mappedBy = "permisoList", fetch = FetchType.EAGER)
+    
+    @ManyToMany(mappedBy = "permisos", fetch = FetchType.EAGER)
     private List<Rol> roles;
     @OneToMany(mappedBy = "permisoPadre", fetch = FetchType.EAGER)
     private List<Permiso> subPermisos;

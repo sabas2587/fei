@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,74 +25,131 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
 @Table(name = "procesos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proceso.findAll", query = "SELECT p FROM Proceso p")
-    , @NamedQuery(name = "Proceso.findByPkidValoracion", query = "SELECT p FROM Proceso p WHERE p.pkidValoracion = :pkidValoracion")
-    , @NamedQuery(name = "Proceso.findByTipoactividad", query = "SELECT p FROM Proceso p WHERE p.tipoactividad = :tipoactividad")
-     , @NamedQuery(name = "Proceso.findByadolescenteValorado", query = "SELECT p FROM Proceso p WHERE p.adolescentepkidAdolescente = :adolescentepkidAdolescente AND p.usuariopkidUsuario = :usuariopkidUsuario AND p.tipoactividad = 'Seguimiento'")     
-    , @NamedQuery(name = "Proceso.findByFechaValoracion", query = "SELECT p FROM Proceso p WHERE p.fechaValoracion = :fechaValoracion")})
+    , @NamedQuery(name = "Proceso.findByIdinformeEx", query = "SELECT p FROM Proceso p WHERE p.idinformeEx = :idinformeEx")
+    , @NamedQuery(name = "Proceso.findByCapacidadRestaurativa", query = "SELECT p FROM Proceso p WHERE p.capacidadRestaurativa = :capacidadRestaurativa")
+    , @NamedQuery(name = "Proceso.findByTipoConcepto", query = "SELECT p FROM Proceso p WHERE p.tipoConcepto = :tipoConcepto")
+    , @NamedQuery(name = "Proceso.findByFechaDiagnostico", query = "SELECT p FROM Proceso p WHERE p.fechaDiagnostico = :fechaDiagnostico")
+    , @NamedQuery(name = "Proceso.findByFortalecimiento", query = "SELECT p FROM Proceso p WHERE p.fortalecimiento = :fortalecimiento")
+    , @NamedQuery(name = "Proceso.findByObjetivos", query = "SELECT p FROM Proceso p WHERE p.objetivos = :objetivos")
+    , @NamedQuery(name = "Proceso.findByTipoproceso", query = "SELECT p FROM Proceso p WHERE p.tipoproceso = :tipoproceso")
+    , @NamedQuery(name = "Proceso.findByTrascendencia", query = "SELECT p FROM Proceso p WHERE p.trascendencia = :trascendencia")
+    , @NamedQuery(name = "Proceso.findByPathConceptoFinal", query = "SELECT p FROM Proceso p WHERE p.pathConceptoFinal = :pathConceptoFinal")})
 public class Proceso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idValoracion")
-    private Integer pkidValoracion;
-    @Column(name = "tipoactividad")
-    private String tipoactividad;
-    @Basic(optional = false)
-    @Column(name = "fechaValoracion")
+    @Column(name = "idinformeEx")
+    private Integer idinformeEx;
+    @Column(name = "capacidadRestaurativa")
+    private String capacidadRestaurativa;
+    @Column(name = "tipo_concepto")
+    private String tipoConcepto;
+    @Column(name = "fechaDiagnostico")
     @Temporal(TemporalType.DATE)
-    private Date fechaValoracion;
+    private Date fechaDiagnostico;
+    @Column(name = "fortalecimiento")
+    private String fortalecimiento;
+    @Column(name = "objetivos")
+    private String objetivos;
+    @Column(name = "tipoproceso")
+    private String tipoproceso;
+    @Column(name = "trascendencia")
+    private String trascendencia;
+    @Column(name = "path_concepto_final")
+    private String pathConceptoFinal;
     @JoinColumn(name = "Adolescente_pk_idAdolescente", referencedColumnName = "pk_idAdolescente")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adolescente adolescentepkidAdolescente;
-    @JoinColumn(name = "Encuesta_pk_idencuesta", referencedColumnName = "pk_idencuesta")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Encuesta encuestapkidencuesta;
     @JoinColumn(name = "Usuario_pk_idUsuario", referencedColumnName = "pk_idUsuario")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuariopkidUsuario;
 
     public Proceso() {
     }
 
-    public Proceso(Integer pkidValoracion) {
-        this.pkidValoracion = pkidValoracion;
+    public Proceso(Integer idinformeEx) {
+        this.idinformeEx = idinformeEx;
     }
 
-    public Proceso(Integer pkidValoracion, Date fechaValoracion) {
-        this.pkidValoracion = pkidValoracion;
-        this.fechaValoracion = fechaValoracion;
+    public Integer getIdinformeEx() {
+        return idinformeEx;
     }
 
-    public Integer getPkidValoracion() {
-        return pkidValoracion;
+    public void setIdinformeEx(Integer idinformeEx) {
+        this.idinformeEx = idinformeEx;
     }
 
-    public void setPkidValoracion(Integer pkidValoracion) {
-        this.pkidValoracion = pkidValoracion;
+    public String getCapacidadRestaurativa() {
+        return capacidadRestaurativa;
     }
 
-    public String getTipoactividad() {
-        return tipoactividad;
+    public void setCapacidadRestaurativa(String capacidadRestaurativa) {
+        this.capacidadRestaurativa = capacidadRestaurativa;
     }
 
-    public void setTipoactividad(String tipoactividad) {
-        this.tipoactividad = tipoactividad;
+    public String getTipoConcepto() {
+        return tipoConcepto;
     }
 
-    public Date getFechaValoracion() {
-        return fechaValoracion;
+    public void setTipoConcepto(String tipoConcepto) {
+        this.tipoConcepto = tipoConcepto;
     }
 
-    public void setFechaValoracion(Date fechaValoracion) {
-        this.fechaValoracion = fechaValoracion;
+    public Date getFechaDiagnostico() {
+        return fechaDiagnostico;
+    }
+
+    public void setFechaDiagnostico(Date fechaDiagnostico) {
+        this.fechaDiagnostico = fechaDiagnostico;
+    }
+
+    public String getFortalecimiento() {
+        return fortalecimiento;
+    }
+
+    public void setFortalecimiento(String fortalecimiento) {
+        this.fortalecimiento = fortalecimiento;
+    }
+
+    public String getObjetivos() {
+        return objetivos;
+    }
+
+    public void setObjetivos(String objetivos) {
+        this.objetivos = objetivos;
+    }
+
+    public String getTipoproceso() {
+        return tipoproceso;
+    }
+
+    public void setTipoproceso(String tipoproceso) {
+        this.tipoproceso = tipoproceso;
+    }
+
+    public String getTrascendencia() {
+        return trascendencia;
+    }
+
+    public void setTrascendencia(String trascendencia) {
+        this.trascendencia = trascendencia;
+    }
+
+    public String getPathConceptoFinal() {
+        return pathConceptoFinal;
+    }
+
+    public void setPathConceptoFinal(String pathConceptoFinal) {
+        this.pathConceptoFinal = pathConceptoFinal;
     }
 
     public Adolescente getAdolescentepkidAdolescente() {
@@ -99,14 +158,6 @@ public class Proceso implements Serializable {
 
     public void setAdolescentepkidAdolescente(Adolescente adolescentepkidAdolescente) {
         this.adolescentepkidAdolescente = adolescentepkidAdolescente;
-    }
-
-    public Encuesta getEncuestapkidencuesta() {
-        return encuestapkidencuesta;
-    }
-
-    public void setEncuestapkidencuesta(Encuesta encuestapkidencuesta) {
-        this.encuestapkidencuesta = encuestapkidencuesta;
     }
 
     public Usuario getUsuariopkidUsuario() {
@@ -120,7 +171,7 @@ public class Proceso implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (pkidValoracion != null ? pkidValoracion.hashCode() : 0);
+        hash += (idinformeEx != null ? idinformeEx.hashCode() : 0);
         return hash;
     }
 
@@ -131,7 +182,7 @@ public class Proceso implements Serializable {
             return false;
         }
         Proceso other = (Proceso) object;
-        if ((this.pkidValoracion == null && other.pkidValoracion != null) || (this.pkidValoracion != null && !this.pkidValoracion.equals(other.pkidValoracion))) {
+        if ((this.idinformeEx == null && other.idinformeEx != null) || (this.idinformeEx != null && !this.idinformeEx.equals(other.idinformeEx))) {
             return false;
         }
         return true;
@@ -139,7 +190,7 @@ public class Proceso implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.fei.entidad.Proceso[ pkidValoracion=" + pkidValoracion + " ]";
+        return "edu.fei.entidad.Proceso[ idinformeEx=" + idinformeEx + " ]";
     }
     
 }

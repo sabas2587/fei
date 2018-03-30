@@ -25,20 +25,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sabas
+ * @author David
  */
 @Entity
-@Table(name = "Actividades")
+@Table(name = "actividades")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Actividad.findAll", query = "SELECT a FROM Actividad a")
     , @NamedQuery(name = "Actividad.findByPkidActividades", query = "SELECT a FROM Actividad a WHERE a.pkidActividades = :pkidActividades")
-    , @NamedQuery(name = "Actividad.findByNombreActividad", query = "SELECT a FROM Actividad a WHERE a.nombreActividad = :nombreActividad")
-    , @NamedQuery(name = "Actividad.findByFechaInicial", query = "SELECT a FROM Actividad a WHERE a.fechaInicial = :fechaInicial")
-    , @NamedQuery(name = "Actividad.findByFechaFinal", query = "SELECT a FROM Actividad a WHERE a.fechaFinal = :fechaFinal")
     , @NamedQuery(name = "Actividad.findByDescripcionActividad", query = "SELECT a FROM Actividad a WHERE a.descripcionActividad = :descripcionActividad")
     , @NamedQuery(name = "Actividad.findByEstado", query = "SELECT a FROM Actividad a WHERE a.estado = :estado")
-    , @NamedQuery(name = "Actividad.findByListaactividad", query = "SELECT a FROM Actividad a WHERE a.listaactividad = :listaactividad")})
+    , @NamedQuery(name = "Actividad.findByFechaFinal", query = "SELECT a FROM Actividad a WHERE a.fechaFinal = :fechaFinal")
+    , @NamedQuery(name = "Actividad.findByFechaInicial", query = "SELECT a FROM Actividad a WHERE a.fechaInicial = :fechaInicial")
+    , @NamedQuery(name = "Actividad.findByListaactividad", query = "SELECT a FROM Actividad a WHERE a.listaactividad = :listaactividad")
+    , @NamedQuery(name = "Actividad.findByNombreActividad", query = "SELECT a FROM Actividad a WHERE a.nombreActividad = :nombreActividad")})
 public class Actividad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,25 +47,25 @@ public class Actividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "pk_idActividades")
     private Long pkidActividades;
-    @Column(name = "nombreActividad")
-    private String nombreActividad;
-    @Column(name = "fechaInicial")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicial;
-    @Column(name = "fechaFinal")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFinal;
     @Column(name = "descripcionActividad")
     private String descripcionActividad;
     @Column(name = "estado")
     private Boolean estado;
+    @Column(name = "fechaFinal")
+    @Temporal(TemporalType.DATE)
+    private Date fechaFinal;
+    @Column(name = "fechaInicial")
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicial;
     @Column(name = "listaactividad")
     private String listaactividad;
+    @Column(name = "nombreActividad")
+    private String nombreActividad;
     @JoinColumn(name = "Adolescente_pk_idAdolescente", referencedColumnName = "pk_idAdolescente")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adolescente adolescentepkidAdolescente;
     @JoinColumn(name = "Usuario_pk_idUsuario", referencedColumnName = "pk_idUsuario")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuariopkidUsuario;
 
     public Actividad() {
@@ -81,30 +81,6 @@ public class Actividad implements Serializable {
 
     public void setPkidActividades(Long pkidActividades) {
         this.pkidActividades = pkidActividades;
-    }
-
-    public String getNombreActividad() {
-        return nombreActividad;
-    }
-
-    public void setNombreActividad(String nombreActividad) {
-        this.nombreActividad = nombreActividad;
-    }
-
-    public Date getFechaInicial() {
-        return fechaInicial;
-    }
-
-    public void setFechaInicial(Date fechaInicial) {
-        this.fechaInicial = fechaInicial;
-    }
-
-    public Date getFechaFinal() {
-        return fechaFinal;
-    }
-
-    public void setFechaFinal(Date fechaFinal) {
-        this.fechaFinal = fechaFinal;
     }
 
     public String getDescripcionActividad() {
@@ -123,12 +99,36 @@ public class Actividad implements Serializable {
         this.estado = estado;
     }
 
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
     public String getListaactividad() {
         return listaactividad;
     }
 
     public void setListaactividad(String listaactividad) {
         this.listaactividad = listaactividad;
+    }
+
+    public String getNombreActividad() {
+        return nombreActividad;
+    }
+
+    public void setNombreActividad(String nombreActividad) {
+        this.nombreActividad = nombreActividad;
     }
 
     public Adolescente getAdolescentepkidAdolescente() {
