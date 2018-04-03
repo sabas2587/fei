@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../../Template/Plantilla.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <h3><i class="fa fa-angle-right"></i> Gestion Actividades </h3>
+                            <!-- page start-->
+                            <div class="row mt">
+
+                                <aside class="col-lg-9 mt">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <h:form>      
+                                                <p:panel id="panel" header="Buscar Profesional" style="margin-bottom:10px;">
+                                                    <p:messages id="messages" />
+
+                                                    <h:panelGrid columns="4" cellpadding="5">
+                                                        <p:outputLabel value="Consultar Profesional"/>
+                                                        <p:selectOneMenu  id="pkidUsuario" value="#{controladorConsultaActividad.usuarioseleccionado.pkidUsuario}" converter="usuarioConverter" >
+                                                            <f:selectItems value="#{controladorConsultaActividad.listaUsuarios}" var="listausuario" itemLabel="#{listausuario.nombre} #{listaAdolecentes.apellidos}"/>
+                                                        </p:selectOneMenu>                                                       
+                                                    </h:panelGrid>
+                                                    <b:commandButton action="#{controladorConsultaActividad.cargarActividades()}" value="Consultar"   update="msgG schEvento "></b:commandButton>
+                                                </p:panel>
+                                                <br></br> 
+                                                  <br></br>
+                                                    <br></br>
+                                                    
+                                                <p:growl id="msgG" showDetail="true"/>
+                                                <p:schedule widgetVar="micalendar" value="#{controladorConsultaActividad.eventomodelo}" id="schEvento" timeZone="America/Bogota">                                              
+
+                                                
+                                                <p:ajax event="eventSelect" listener="#{controladorActividad.seleccionado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                                                
+                                            </p:schedule>
+
+                                            <p:dialog  widgetVar="eventDialog" header="Actividad" resizable="true" modal="true" showEffect="clip" hideEffect="clip">
+
+                                                <p:outputPanel id="eventDetails">
+
+                                                    <h:panelGrid  columns="2">
+
+
+
+                                                        <p:outputLabel value="Titulo"/>
+                                                        <p:inputText value="#{controladorConsultaActividad.actividad.nombreActividad}"/>
+
+                                                        <p:outputLabel value="Inicio-Tarea"/>
+                                                        <p:calendar value="#{controladorConsultaActividad.actividad.fechaInicial}" timeZone="GMT-5" pattern="dd/MM/yyyy HH:mm"/>
+
+                                                        <p:outputLabel value="Fin-Tarea"/>
+                                                        <p:calendar value="#{controladorConsultaActividad.actividad.fechaFinal}" timeZone="GMT-5" pattern="dd/MM/yyyy HH:mm"/> 
+
+                                                        <p:outputLabel value="Estado" />
+                                                        <p:selectOneMenu value="#{controladorConsultaActividad.actividad.estado}">
+                                                            <f:selectItem itemValue="1" itemLabel="Iniciada"/>
+                                                            <f:selectItem itemValue="2" itemLabel="Proceso"/>
+                                                            <f:selectItem itemValue="3" itemLabel="Finalizada"/>
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel value="Descripcion Actividad"/>
+                                                        <p:inputTextarea rows="6" cols="33"   value="#{controladorConsultaActividad.actividad.descripcionActividad}"/>                                                        
+                                                        <p:outputLabel value="Tipo de Actividad"/>
+                                                        <p:selectOneMenu value="#{controladorConsultaActividad.actividad.listaactividad}">
+                                                            <f:selectItem itemValue="1" itemLabel="Musica"/>
+                                                            <f:selectItem itemValue="2" itemLabel="Deporte"/>
+                                                            <f:selectItem itemValue="3" itemLabel="Ciencia"/>
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel value="Adolescente"/>
+                                                        <p:selectOneMenu id="adolescentepkidAdolescente" value="#{controladorConsultaActividad.actividad.adolescentepkidAdolescente}" converter="adolescenteConverter">
+                                                            <f:selectItems value="#{controladorListarAdolecentes.listaAdolecentes}" var="listaAdolecentes" itemLabel="#{listaAdolecentes.nombre} #{listaAdolecentes.apellidos}"/>
+                                                        </p:selectOneMenu>                                                     
+
+
+                                                    </h:panelGrid>
+
+                                                </p:outputPanel>
+                                            </p:dialog>
+                                                
+                                            </h:form>
+
+                                        </div>
+                                    </section>
+                                </aside>
+                            </div>
+                            <!-- page end-->
+                        </section>
+                    </section>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
