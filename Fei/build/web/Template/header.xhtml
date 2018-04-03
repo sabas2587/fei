@@ -3,7 +3,8 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             xmlns:p="http://primefaces.org/ui">
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:b="http://bootsfaces.net/ui">
 
 
     <header class="header black-bg">
@@ -11,13 +12,22 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="#{request.contextPath}/Views/PaginaIndex.xhtml" class="logo"><b>GESTION F.E.I</b></a>
-        <!--logo end-->
-        
+        <a href="#{request.contextPath}/Views/PaginaInicioUsuario.xhtml" class="logo"><b>GESTION F.E.I</b></a>
+        <!--logo end-->     
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+            <ul class="nav top-menu">
+                <!-- settings start -->
+                
+                <!-- settings end -->
+                <!-- inbox dropdown start-->
+                <h2 class="logo-inicio">GESTION F.E.I</h2>
+            </ul>
+        </div>
+
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <!-- corregir boton logout, por alguna razon se dispara solo e invalida el bean de sesion borrando todos los datos del controlador...-->
-                <!-- <li><a class="logout fa fa-sign-out" href="">Logout</a></li> -->
+
                 <h:form>
                     <li><h:commandButton action="#{controladorSesion.cerrarSesion()}" class="logout fa fa-sign-out" value="cerrar sesion"></h:commandButton></li>
                 </h:form>

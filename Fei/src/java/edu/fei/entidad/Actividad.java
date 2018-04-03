@@ -34,10 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actividad.findAll", query = "SELECT a FROM Actividad a")
     , @NamedQuery(name = "Actividad.findByPkidActividades", query = "SELECT a FROM Actividad a WHERE a.pkidActividades = :pkidActividades")
     , @NamedQuery(name = "Actividad.findByDescripcionActividad", query = "SELECT a FROM Actividad a WHERE a.descripcionActividad = :descripcionActividad")
-    , @NamedQuery(name = "Actividad.findByEstado", query = "SELECT a FROM Actividad a WHERE a.estado = :estado")
+   , @NamedQuery(name = "Actividad.findByEstado", query = "SELECT a FROM Actividad a WHERE a.estado = :estado AND a.usuariopkidUsuario = :usuario"  )
     , @NamedQuery(name = "Actividad.findByFechaFinal", query = "SELECT a FROM Actividad a WHERE a.fechaFinal = :fechaFinal")
     , @NamedQuery(name = "Actividad.findByFechaInicial", query = "SELECT a FROM Actividad a WHERE a.fechaInicial = :fechaInicial")
     , @NamedQuery(name = "Actividad.findByListaactividad", query = "SELECT a FROM Actividad a WHERE a.listaactividad = :listaactividad")
+    , @NamedQuery(name = "Actividad.Usuario", query = "SELECT a FROM Actividad a WHERE a.usuariopkidUsuario = :usuario") 
     , @NamedQuery(name = "Actividad.findByNombreActividad", query = "SELECT a FROM Actividad a WHERE a.nombreActividad = :nombreActividad")})
 public class Actividad implements Serializable {
 
@@ -50,7 +51,7 @@ public class Actividad implements Serializable {
     @Column(name = "descripcionActividad")
     private String descripcionActividad;
     @Column(name = "estado")
-    private Boolean estado;
+    private String estado;
     @Column(name = "fechaFinal")
     @Temporal(TemporalType.DATE)
     private Date fechaFinal;
@@ -91,11 +92,11 @@ public class Actividad implements Serializable {
         this.descripcionActividad = descripcionActividad;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

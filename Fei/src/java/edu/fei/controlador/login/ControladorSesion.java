@@ -77,6 +77,14 @@ public class ControladorSesion implements Serializable {
         this.usuariosFacade = usuariosFacade;
     }
 
+    public List<Usuario> getListaUsuario() {
+        return listaUsuario = usuariosFacade.findAll();
+    }
+
+    public void setListaUsuario(List<Usuario> listaUsuario) {
+        this.listaUsuario = listaUsuario;
+    }
+    
     public String iniciarSesion() {
         usuarioSesion = usuariosFacade.inicioSesion(numdocumento, clave);
         if (usuarioSesion != null) {

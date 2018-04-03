@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../../Template/Plantilla.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <h3><i class="fa fa-angle-right"></i> Gestion Actividades </h3>
+                            <!-- page start-->
+                            <div class="row mt">
+                                <aside class="col-lg-3 mt">
+                                    <b:panelGrid columns="2">
+                                    <b:label text="Tareas Asignadas" severity="info"/>
+                                        <b:badge value="#{controladorActividad.listaActividad.size().toString()}"/>
+                                        </b:panelGrid>
+                                    <p:panelGrid  columns="2" id="progreso">
+
+                                        <h:outputText value="Actividad" />
+                                        <h:outputText value="Estado Actividades" />
+
+                                        <b:label text="Iniciada" severity="info"/>
+                                        <b:progressBar value="#{controladorActividad.numeroIniciada.size().toString()}" min="0" max="#{controladorActividad.listaActividad.size().toString()}" animated="true"/>
+                                        <b:label text="Proceso" severity="warning"/>
+                                        <b:progressBar value="#{controladorActividad.numeroProceso.size().toString()}" min="0" max="#{controladorActividad.listaActividad.size().toString()}"  animated="true" />
+                                        <b:label text="Finalizada" severity="success"/>
+                                        <b:progressBar value="#{controladorActividad.numeroFinalizada.size().toString()}" min="0" max="#{controladorActividad.listaActividad.size().toString()}"  animated="true"/> 
+
+                                    </p:panelGrid>
+
+
+
+                                </aside>
+                                <aside class="col-lg-9 mt">
+                                    <section class="panel">
+                                        <div class="panel-body">
+
+
+                                            <p:growl id="msgG" showDetail="true"/>
+                                            <p:schedule widgetVar="micalendar" value="#{controladorActividad.eventomodelo}" id="schEvento" timeZone="America/Bogota">                                              
+
+                                                <p:ajax event="dateSelect" listener="#{controladorActividad.eventNuevo}" update="eventDetails" oncomplete="PF('eventDialog').show();"/>
+                                                <p:ajax event="eventSelect" listener="#{controladorActividad.seleccionado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                                                <p:ajax event="eventMove" listener="#{controladorActividad.eventMovimiento}" update="schEvento"/>
+                                                <p:ajax event="eventResize" listener="#{controladorActividad.eventRedimensionado}" update="schEvento"/>
+
+
+                                            </p:schedule>
+
+                                            <p:dialog  widgetVar="eventDialog" header="Actividad" resizable="true" modal="true" showEffect="clip" hideEffect="clip">
+
+                                                <p:outputPanel id="eventDetails">
+
+                                                    <h:panelGrid  columns="2">
+
+
+
+                                                        <p:outputLabel value="Titulo"/>
+                                                        <p:inputText value="#{controladorActividad.actividad.nombreActividad}"/>
+
+                                                        <p:outputLabel value="Inicio-Tarea"/>
+                                                        <p:calendar value="#{controladorActividad.actividad.fechaInicial}" timeZone="GMT-5" pattern="dd/MM/yyyy HH:mm"/>
+
+                                                        <p:outputLabel value="Fin-Tarea"/>
+                                                        <p:calendar value="#{controladorActividad.actividad.fechaFinal}" timeZone="GMT-5" pattern="dd/MM/yyyy HH:mm"/> 
+
+                                                        <p:outputLabel value="Estado" />
+                                                       <p:selectOneMenu value="#{controladorActividad.actividad.estado}">
+                                                            <f:selectItem itemValue="1" itemLabel="Iniciada"/>
+                                                            <f:selectItem itemValue="2" itemLabel="Proceso"/>
+                                                            <f:selectItem itemValue="3" itemLabel="Finalizada"/>
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel value="Descripcion Actividad"/>
+                                                        <p:inputTextarea rows="6" cols="33"   value="#{controladorActividad.actividad.descripcionActividad}"/>                                                        
+                                                        <p:outputLabel value="Tipo de Actividad"/>
+                                                        <p:selectOneMenu value="#{controladorActividad.actividad.listaactividad}">
+                                                            <f:selectItem itemValue="1" itemLabel="Musica"/>
+                                                            <f:selectItem itemValue="2" itemLabel="Deporte"/>
+                                                            <f:selectItem itemValue="3" itemLabel="Ciencia"/>
+                                                        </p:selectOneMenu>
+
+                                                        <p:outputLabel value="Adolescente"/>
+                                                        <p:selectOneMenu id="adolescentepkidAdolescente" value="#{controladorActividad.actividad.adolescentepkidAdolescente}" converter="adolescenteConverter">
+                                                            <f:selectItems value="#{controladorListarAdolecentes.listaAdolecentes}" var="listaAdolecentes" itemLabel="#{listaAdolecentes.nombre} #{listaAdolecentes.apellidos}"/>
+                                                        </p:selectOneMenu>
+
+
+
+                                                        <p:commandButton value="Guardar" action="#{controladorActividad.guardar}"  update="msgG schEvento progreso" oncomplete="PF('eventDialog').hide();"/>
+
+
+                                                    </h:panelGrid>
+
+                                                </p:outputPanel>
+                                            </p:dialog>
+
+                                        </div>
+                                    </section>
+                                </aside>
+                            </div>
+                            <!-- page end-->
+                        </section>
+                    </section>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

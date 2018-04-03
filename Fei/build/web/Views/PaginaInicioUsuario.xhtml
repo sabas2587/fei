@@ -5,6 +5,30 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="content">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages': ['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                var data = google.visualization.arrayToDataTable([
+                    ['Tareas', 'Diarias'],
+                    ['Valoraciones', #{controladorSesion.listaUsuario.size().toString()}],
+                    ['Novedades',#{controladorActividad.numeroIniciada.size().toString()}],
+                    ['Adolescentes',#{controladorListarAdolecentes.listaAdolecentes.size().toString()} ]
+                ]);
+
+                var options = {
+                    title: 'Estado Del Adolescente'
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
+            }
+        </script>
+
         <section id="main-content">
             <section class="wrapper">
 
@@ -15,48 +39,11 @@
                         <div class="btn-group btn-breadcrumb">
                             <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
                             <a href="#" class="btn btn-default">Inicio</a>
-
+                            
 
                         </div>
 
-                        <div class="row mtbox">
-                            <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                                <div class="box1">
-                                    <span class="fa fa-heart-o"></span>
-                                    <h3 id="cabecera">+3</h3>
-                                </div>
-                                <p>Diagnosticos Pendientes por Realizar</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                <div class="box1">
-                                    <span class=" fa fa-user-md"></span>
-                                    <h3>+2</h3>
-                                </div>
-                                <p>Intervenciones Pendientes por Realizar.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                <div class="box1">
-                                    <span class="fa fa-inbox"></span>
-                                    <h3>+10</h3>
-                                </div>
-                                <p>Hola tienes 10 Valoraciones pendientes.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                <div class="box1">
-                                    <span class="fa fa-tasks"></span>
-                                    <h3>+10</h3>
-                                </div>
-                                <p>Informes por revisar y enviar.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2 box0">
-                                <div class="box1">
-                                    <span class="fa fa-users"></span>
-                                    <h3>+10</h3>
-                                </div>
-                                <p>Registros Nuevos</p>
-                            </div>
-
-                        </div><!-- /row mt -->	
+                        <div id="piechart" style="width: 900px; height: 500px;"></div>
 
 
                     </div><!-- /col-lg-9 END SECTION MIDDLE -->
@@ -130,24 +117,13 @@
                         <!-- USERS ONLINE SECTION -->
                         <h3>Miembros de la fundacion </h3>
 
-                        <!-- Second Member -->
-                        <div class="desc">
-                            <div class="thumb">
-                                <img class="img-circle" src="../resources/imgs/profile-01.jpg" width="35px" height="35px" align=""/>
-                            </div>
-                            <div class="details">
-                                <p><a href="#aboutModal" data-toggle="modal" data-target="#cordinador">Cordinador</a><br/>
-                                    <muted>Ocupado</muted>
-                                </p>
-                            </div>
-                        </div>
                         <!-- Trercer Member -->
                         <div class="desc">
                             <div class="thumb">
                                 <img class="img-circle" src="../resources/imgs/alvaro.jpeg" width="35px" height="35px" align=""/>
                             </div>
                             <div class="details">
-                                <p><a href="#">Alvaro Marin</a><br/>
+                                <p><a href="#"></a><br/>
                                     <muted>Disponible</muted>
                                 </p>
                             </div>
