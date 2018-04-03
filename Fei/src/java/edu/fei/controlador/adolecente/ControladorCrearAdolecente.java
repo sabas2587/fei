@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -84,7 +85,7 @@ public class ControladorCrearAdolecente implements Serializable {
         this.remision = remision;
     }
 
-    public void upload() {
+    public String upload() {
         try {
             String name = "";
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -96,14 +97,19 @@ public class ControladorCrearAdolecente implements Serializable {
                 name = fileBean.getFileNameFull();
             }
             //deleteFile(ec, "Tablero y TV.c4d");
+            remision.setFechaRemision(new Date());
             remisionFacade.create(remision);
+            adolescente.setEstado(1);
             adolescente.setRemisionpkordenRemision(remision);
             adolescente.setPathDocument(UPLOAD_DIR + name);
             adolescenteFacade.create(adolescente);
+            return "/Views/Adolescente/listAdolescente.xhtml?faces-redirect=true";
         } catch (IOException ex) {
             ex.printStackTrace();
+            return "";
         } catch (ServletException ex) {
             ex.printStackTrace();
+            return "";
         }
 
     }

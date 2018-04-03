@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="../../Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+
+                    </div>
+                </div>
+                <br></br>                                               
+
+                <div class="row form-group">
+
+                    <div class="col-xs-12">
+                        <h3 class="active">Listar Adolescente</h3> 
+                        <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                            <li class="disabled"><a href="#step-2">
+                                    <h4 class="list-group-item-heading"></h4>
+                                    <p class="list-group-item-text"></p>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Informacion Remision -->   
+
+                <h:form id="form" prependId="false">
+                    <b:messages showDetail="true" showSummary="true"></b:messages>
+                    <!-- Informacion remision -->
+
+
+                    <!-- Informacion Adolescente -->
+
+                    <div class="row " id="step-2">
+                        <div class="col-xs-12">
+                            <div class="col-md-12 well text-center">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="input-group">
+
+                                            <p:dataTable value="#{controladorListarAdolecentesInactivos.listaProcesos}" var="listaAdolecentes">
+                                                <p:column headerText="Id">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.pkidAdolescente}" />
+                                                </p:column>
+                                                <p:column headerText="tipo documento">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.tipoDocumento}" />
+                                                </p:column>
+                                                <p:column headerText="numero documento">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.numeroDocumento}" />
+                                                </p:column>
+                                                <p:column headerText="nombre">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.nombre}" />
+                                                </p:column>
+                                                <p:column headerText="apellido">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.apellidos}" />
+                                                </p:column>
+                                                <p:column headerText="fecha nacimiento">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.fechaNacimiento}" />
+                                                </p:column>
+                                                <p:column headerText="lugar nacimiento">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.lugarNacimiento}" />
+                                                </p:column>
+                                                <p:column headerText="Fecha nacimiento">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.fechaNacimiento}" >
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column headerText="escolaridad">
+                                                    <h:outputText value="#{listaAdolecentes.adolescentepkidAdolescente.escolaridad}" />
+                                                </p:column>
+                                                <p:column headerText="remision">
+                                                    <a href="#{request.contextPath}#{listaAdolecentes.pathConceptoFinal}">Descargar orden salida</a>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <br></br>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Informacion sede -->
+                    <!-- Documentos Adolescentes -->
+
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+
+                            <h:outputText value="Popup:" />
+                            <h:outputText value="#{calendarView.date2}">
+                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                            </h:outputText>
+
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+
+            </section><!--/wrapper -->
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>
+

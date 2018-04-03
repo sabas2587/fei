@@ -6,20 +6,15 @@
 package edu.fei.controlador.valoracion;
 
 import edu.fei.controlador.login.ControladorSesion;
-import edu.fei.entidad.Acudiente;
 import edu.fei.entidad.Adolescente;
 import edu.fei.entidad.Encuesta;
-import edu.fei.entidad.Remision;
 import edu.fei.entidad.Valoracion;
-import edu.fei.facade.AcudienteFacade;
 import edu.fei.facade.AdolescenteFacade;
 import edu.fei.facade.EncuestaFacade;
-import edu.fei.facade.RemisionFacade;
 import edu.fei.facade.ValoracionFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,7 +53,7 @@ public class ControladorCrearValoracion implements Serializable {
     @PostConstruct
     public void init() {
         listaValoraciones = valoracionFacade.findAll();
-        listaAdolecentes = adolescenteFacade.findAll();
+        listaAdolecentes = adolescenteFacade.adolescentesActivos();
         valoracion = new Valoracion();
         encuesta1 = new Encuesta("<cambiar pregunta>");
         encuesta2 = new Encuesta("<cambiar pregunta>");
@@ -128,7 +123,7 @@ public class ControladorCrearValoracion implements Serializable {
     public void validarAdolecentes(List<Adolescente> listaAdolecentes) {
         if (listaAdolecentes.isEmpty()) {
             System.out.println("esta vacio");
-            this.listaAdolecentes = adolescenteFacade.findAll();
+            this.listaAdolecentes = adolescenteFacade.adolescentesActivos();
 
         } else {
             System.out.println("no esta vacio");

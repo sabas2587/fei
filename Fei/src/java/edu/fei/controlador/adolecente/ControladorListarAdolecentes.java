@@ -31,7 +31,7 @@ public class ControladorListarAdolecentes implements  Serializable{
     
     @PostConstruct
     public void init(){
-        listaAdolecentes = adolescenteFacade.findAll();
+        listaAdolecentes = adolescenteFacade.adolescentesActivos();
         
     }
 

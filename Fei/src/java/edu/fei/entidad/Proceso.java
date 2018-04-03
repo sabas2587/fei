@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Proceso.findByObjetivos", query = "SELECT p FROM Proceso p WHERE p.objetivos = :objetivos")
     , @NamedQuery(name = "Proceso.findByTipoproceso", query = "SELECT p FROM Proceso p WHERE p.tipoproceso = :tipoproceso")
     , @NamedQuery(name = "Proceso.findByTrascendencia", query = "SELECT p FROM Proceso p WHERE p.trascendencia = :trascendencia")
+    , @NamedQuery(name = "Proceso.procesosUsuarioSesion", query = "SELECT p FROM Proceso p WHERE p.usuariopkidUsuario != :usuariopkidUsuario")
+    , @NamedQuery(name = "Proceso.procesos", query = "SELECT p FROM Proceso p WHERE p.usuariopkidUsuario = :usuariopkidUsuario")
+    , @NamedQuery(name = "Proceso.adolescenteListoSalir", query = "SELECT p FROM Proceso p WHERE p.tipoproceso = 'informe de seguimiento'")
     , @NamedQuery(name = "Proceso.findByPathConceptoFinal", query = "SELECT p FROM Proceso p WHERE p.pathConceptoFinal = :pathConceptoFinal")})
 public class Proceso implements Serializable {
 

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+                    </div>
+                </div>
+                <br></br>                                               
+                <br></br> 
+
+                <f:view>
+
+                    <h:form>
+                        <h1><h:outputText value="Listado de procesos:"/></h1>
+                        <p:dataTable value="#{controladorListarProcesos.listaProcesos}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdinformeEx"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idinformeEx}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CapacidadRestaurativa"/>
+                                </f:facet>
+                                <h:outputText value="#{item.capacidadRestaurativa}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TipoConcepto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoConcepto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaDiagnostico"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaDiagnostico}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fortalecimiento"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fortalecimiento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Objetivos"/>
+                                </f:facet>
+                                <h:outputText value="#{item.objetivos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipoproceso"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoproceso}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Trascendencia"/>
+                                </f:facet>
+                                <h:outputText value="#{item.trascendencia}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Adolescente"/>
+                                </f:facet>
+                                <h:outputText value="#{item.adolescentepkidAdolescente.nombre} #{item.adolescentepkidAdolescente.apellidos}"/>
+                            </p:column>
+                            <p:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Profesional"/>
+                                </f:facet>
+                                <h:outputText value="#{item.usuariopkidUsuario.nombre} #{item.usuariopkidUsuario.apellidos}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </section><!--/wrapper -->
+
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>

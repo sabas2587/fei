@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+                    </div>
+                </div>
+                <br></br>                                               
+                <br></br> 
+                <br></br> 
+                <br></br> 
+
+                <f:view>
+
+                    <h:form>
+
+                        <h1><h:outputText value="buscar"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:selectOneMenu value="#{controladorListarNovedad.adolescente}" converter="adolescenteConverter">
+                                <f:selectItems value="#{controladorListarNovedad.listaAdolescentes}" var="listaAdolescentes" itemLabel="#{listaAdolescentes.nombre} #{listaAdolescentes.apellidos}"></f:selectItems>
+                            </p:selectOneMenu>
+                            <p:commandButton value="listar" action="#{controladorListarNovedad.listarNovedades()}" update="table"></p:commandButton>
+                        </p:panelGrid>
+                        <h1><h:outputText value="Novedades por adolescente: "/></h1>
+                        <p:dataTable value="#{controladorListarNovedad.listarNovedades()}" var="item" id="table">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Idintervecion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idintervecion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fechaintervencion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaintervencion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipointervencion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipointervencion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Usuario que ingreso la novedad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.usuariopkidUsuario.nombre} #{item.usuariopkidUsuario.apellidos}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </section><!--/wrapper -->
+
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>

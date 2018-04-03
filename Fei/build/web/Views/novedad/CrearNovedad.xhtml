@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/Template/Plantilla.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"     
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="col-lg-9 main-chart">
+                    <div class="btn-group btn-breadcrumb">
+                        <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="PaginaInicioUsuario.xhtml" class="btn btn-default">Inicio</a>
+                        <a href="Valoracion.xhtml" class="btn btn-default">Seguimiento</a>
+                        <a href="RegistrarValoracion.xhtml" class="btn btn-default">RegistrarValoracion</a>
+                    </div>
+                </div>
+                <br></br>                                               
+                <br></br> 
+
+                <f:view>
+
+                    <h:form>
+
+                        <b:messages showDetail="true" showSummary="true"></b:messages>
+
+                        <div class="row form-group">
+
+                            <div class="col-xs-12" style="text-align: center">
+                                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                    <li class="active">
+                                        <h4 id="activate-step-1" class="list-group-item-heading">Ingresar novedad</h4>
+                                        <p class="list-group-item-text"></p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row " id="step-1" >
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+
+                                    <div class="row">
+                                        <br></br>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <label>Adolescente</label>
+                                            <div class="input-group">
+                                                <h:selectOneMenu class="form-control" value="#{controladorCrearNovedad.novedad.adolescentepkidAdolescente}" converter="adolescenteConverter" required="true" requiredMessage="No hay adolecentes por valorar">
+                                                    <f:selectItems value="#{controladorCrearNovedad.listaAdolescentes}" var="listaAdolecentes" itemLabel="#{listaAdolecentes.nombre} #{listaAdolecentes.apellidos}"/>
+                                                </h:selectOneMenu>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <label>Tipo Intervencion: </label>
+                                            <div class="input-group">
+                                                <h:inputText class="form-control" id="txtNombre" value="#{controladorCrearNovedad.novedad.tipointervencion}" required="true" requiredMessage="campo requerido"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <label>Descripcion: </label>
+                                            <div class="input-group">
+                                                <h:inputTextarea class="form-control" id="txtNombr" value="#{controladorCrearNovedad.novedad.descripcion}"  required="true" requiredMessage="campo requerido"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                </span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-12 " style="text-align: center">
+                                                <div class=" ">
+                                                    <div class="btn-toolbar panel-body" >
+                                                        <h:commandButton class="btn btn-primary" value="cancelar" action="/Views/novedad/ListarNovedades.xhtml?faces-redirect=true" immediate="true"></h:commandButton>
+                                                        <h:commandButton class="btn btn-primary  " value="Guardar" action="#{controladorCrearNovedad.crear()}"></h:commandButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <br></br>
+
+                            </div>
+                        </div>
+
+
+
+                    </h:form>
+
+                </f:view>
+
+            </section><!--/wrapper -->
+
+        </section><!-- /MAIN CONTENT -->
+
+    </ui:define>
+
+</ui:composition>

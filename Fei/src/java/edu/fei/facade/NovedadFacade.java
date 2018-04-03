@@ -5,10 +5,14 @@
  */
 package edu.fei.facade;
 
+import edu.fei.entidad.Adolescente;
 import edu.fei.entidad.Novedad;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +31,15 @@ public class NovedadFacade extends AbstractFacade<Novedad> {
 
     public NovedadFacade() {
         super(Novedad.class);
+    }
+    
+    public List<Novedad> listarNovedadesPorAdolecente(Adolescente a){
+        List<Novedad>listaNovedades = new ArrayList<>();
+        Query q = getEntityManager().createQuery("SELECT n from Novedad n WHERE n.adolescentepkidAdolescente = :adolescentepkidAdolescente", Novedad.class);
+        q.setParameter("adolescentepkidAdolescente", a);
+        listaNovedades = q.getResultList();
+        return listaNovedades;
+    
     }
     
 }
