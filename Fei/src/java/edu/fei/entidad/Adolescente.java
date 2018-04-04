@@ -69,7 +69,7 @@ public class Adolescente implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "numeroDocumento")
-    private BigInteger numeroDocumento;
+    private Integer numeroDocumento;
     @Lob
     @Column(name = "path_document")
     private String pathDocument;
@@ -154,11 +154,11 @@ public class Adolescente implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigInteger getNumeroDocumento() {
+    public Integer getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(BigInteger numeroDocumento) {
+    public void setNumeroDocumento(Integer numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 

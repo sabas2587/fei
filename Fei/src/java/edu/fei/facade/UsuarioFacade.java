@@ -6,6 +6,8 @@
 package edu.fei.facade;
 
 import edu.fei.entidad.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,19 +33,22 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public Usuario inicioSesion(int numdocuemnto, String clave) {
-
-        Usuario u = null;
+        List<Usuario>listaUsuarios = new ArrayList<>();
+        Usuario usuario = null;
 
         try {
 
             TypedQuery<Usuario> query = getEntityManager().createNamedQuery("Usuario.login", Usuario.class);
             query.setParameter("numeroDocumento", numdocuemnto);
             query.setParameter("contraseña", clave);
-            u = query.getSingleResult();
+            listaUsuarios = query.getResultList();
+            for(Usuario u: listaUsuarios){
+                usuario = u;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return u;
+        return usuario;
     }
 }

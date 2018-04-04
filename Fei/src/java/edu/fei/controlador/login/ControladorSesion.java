@@ -86,15 +86,20 @@ public class ControladorSesion implements Serializable {
     }
     
     public String iniciarSesion() {
+        stringMenu = "";
         usuarioSesion = usuariosFacade.inicioSesion(numdocumento, clave);
         if (usuarioSesion != null) {
             System.out.println(usuarioSesion.getNombre());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLog", usuarioSesion);
             renderizarPermisos(usuarioSesion.getRolpkidRol().getPermisos());
+            clave = "";
+            numdocumento = 0;
             return "/Views/PaginaInicioUsuario.xhtml?faces-redirect=true";
 
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario y/o clave incorrectas"));
+            clave = "";
+            numdocumento = 0;
+            FacesContext.getCurrentInstance().addMessage("mensaje", new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario y/o clave incorrectas"));
             return "";
 
         }

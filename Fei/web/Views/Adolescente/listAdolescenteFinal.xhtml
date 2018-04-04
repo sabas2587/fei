@@ -86,6 +86,9 @@
                                                 <p:column headerText="remision">
                                                     <a href="#{request.contextPath}#{listaAdolecentes.pathConceptoFinal}">Descargar orden salida</a>
                                                 </p:column>
+                                                <p:column headerText="opciones">
+                                                    <h:commandLink value="exportar" actionListener="#{controladorListarAdolecentesInactivos.exportarPDF(listaAdolecentes)}"></h:commandLink>
+                                                </p:column>
                                             </p:dataTable>
                                         </div>
 

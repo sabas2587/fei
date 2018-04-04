@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f3b307d-9ebb-4cf1-8d73-c1046565fab5">
+	<property name="ireport.zoom" value="1.3310000000000015"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Usuario" class="java.lang.String"/>
+	<parameter name="capacidadRestaurativa" class="java.lang.String"/>
+	<parameter name="fortalecimiento" class="java.lang.String"/>
+	<parameter name="objetivos" class="java.lang.String"/>
+	<parameter name="trascendencia" class="java.lang.String"/>
+	<parameter name="nombreAdolescente" class="java.lang.String"/>
+	<parameter name="numeroDocumento" class="java.lang.Integer"/>
+	<parameter name="fechaIngreso" class="java.util.Date"/>
+	<parameter name="tipoRemision" class="java.lang.String"/>
+	<parameter name="autoridad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="97" height="79" uuid="3f8bc615-eaa4-4fdf-b15a-6aff2e569358"/>
+				<imageExpression><![CDATA["img\\logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="231" y="0" width="324" height="36" forecolor="#999999" uuid="131dc5b9-b63a-4267-a05c-0d8404e7a473"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Informe final adolescente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="36" width="76" height="20" forecolor="#999999" uuid="d4787497-5765-425c-8871-b64f3a2c0eef"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Generado por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="307" y="36" width="248" height="20" forecolor="#999999" uuid="682e5cc2-cdb2-49a1-9df0-c801dda17b05"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="155" height="24" uuid="6a8aa0ff-0a56-458b-a2e9-5cc907e5ebbc"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Nombre adolescente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="155" height="24" uuid="ac9f8962-cfde-401b-9cfe-8b30379930f6"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Fecha de ingreso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="10" width="400" height="24" uuid="b78e4ee8-eabc-4a47-ba88-5c7db1efcb08"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreAdolescente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="34" width="400" height="24" uuid="18c29097-fc22-4c8e-8333-ab71248688c1"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numeroDocumento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="155" height="24" uuid="bd56883b-ead9-4e21-a7a4-f5e33f46e0fc"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Documento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="58" width="400" height="24" uuid="c56b84c8-a23a-42ac-ae74-b7d70dbe8d07"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaIngreso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="82" width="155" height="24" uuid="c296aee4-61f1-4970-896e-8e4b1b2d47ff"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Tipo de remision:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="82" width="400" height="24" uuid="dbbbc40e-4b16-4495-b72c-9d9c6819a1fa"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipoRemision}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="106" width="155" height="24" uuid="1d8452f8-0baa-49b3-ab88-255e0c8a8183"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Autoridad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="106" width="400" height="24" uuid="997c79b1-7920-4380-9fd6-2fb0ddf509ba"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{autoridad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="531" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="8" width="189" height="25" uuid="890b70c4-4ca4-458f-a86e-25da481f08d3"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[1. Capacidad restaurativa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="33" width="555" height="80" uuid="e14428d9-18ed-4a96-8ea7-cb42b167de57"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{capacidadRestaurativa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="123" width="189" height="25" uuid="c618dce8-8157-481c-aeff-9715668ab7b2"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[2. Fortalecimiento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="148" width="555" height="80" uuid="8ccd689c-b410-4a42-9035-506774a5de1f"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fortalecimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="238" width="189" height="25" uuid="65323f85-9f2c-4adc-a786-4e5fce9bb98c"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[3. Objetivo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="263" width="555" height="80" uuid="f5147e70-75d9-477a-8142-a19d10f1a524"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{objetivos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="353" width="189" height="25" uuid="5d39e74a-f21a-43c8-aaaa-1b8fda3a17ca"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[4. Trascendencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="378" width="555" height="80" uuid="35f4d961-e7d7-46ce-8c9f-cb58e66fd3bb"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{trascendencia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="345" y="512" width="168" height="1" uuid="8e956192-a50c-485e-8166-c80a9d8e5e01"/>
+			</line>
+			<staticText>
+				<reportElement x="345" y="458" width="100" height="20" uuid="48702c48-8a13-4807-9859-8b7b153e6ab8"/>
+				<text><![CDATA[Firma coordinador:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch"/>
+	</summary>
+</jasperReport>

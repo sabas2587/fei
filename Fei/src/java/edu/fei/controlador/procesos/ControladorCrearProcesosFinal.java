@@ -20,7 +20,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -29,8 +31,14 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -100,9 +108,9 @@ public class ControladorCrearProcesosFinal implements Serializable {
     }
 
     public void validarValoracionesAdolecente() {
-        for(Proceso p:listaProcesos){
+        for (Proceso p : listaProcesos) {
             listaAdolescentes.add(p.getAdolescentepkidAdolescente());
-        
+
         }
         /*for (Adolescente a : new ArrayList<>(this.listaAdolescentes)) {
             if (a.getValoracionList().size() < 4) {
@@ -123,8 +131,10 @@ public class ControladorCrearProcesosFinal implements Serializable {
 
     }
 
-    public String crearProceso() {
+
+    public String crearProceso() throws JRException {
         try {
+
             String name = "";
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
@@ -145,6 +155,7 @@ public class ControladorCrearProcesosFinal implements Serializable {
             Adolescente a = proceso.getAdolescentepkidAdolescente();
             a.setEstado(0);
             adolescenteFacade.edit(a);
+
             return "/Views/Proceso/ListarProcesos.xhtml?faces-redirect=true";
 
         } catch (IOException ex) {
